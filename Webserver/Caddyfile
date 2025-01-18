@@ -1,4 +1,4 @@
 localhost
 
-root * ./HTML_TEST
+root * ./Html
 file_server

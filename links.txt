@@ -1,2 +1,7 @@
-https://chatgpt.com/share/678bac36-d608-800d-b69a-303b2bed0f66
-https://chatgpt.com/share/678bac95-7620-800c-b2b3-21160d5cdc41 (manuels)
+Main-Chat:          https://chatgpt.com/share/678bac36-d608-800d-b69a-303b2bed0f66
+
+Extra-Chat:         https://chatgpt.com/share/678bac95-7620-800c-b2b3-21160d5cdc41 (manuels)
+
+Caddy-Getstarted:   https://caddyserver.com/docs/getting-started
+
+SQL-Tutorial:       https://www.youtube.com/watch?v=xiUTqnI6xk8&t=422s

@@ -1,4 +1,4 @@
 localhost
 
-root * C:\Users\Manuel\Desktop\Manuels Dokumente\Contacts\Lernplan\Webserver\HTML_TEST
+root * ./HTML_TEST
 file_server

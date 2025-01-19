@@ -1,5 +1,4 @@
-localhost:2015, localhost {
-    root * ..\Html
-    file_server
+localhost:2015, localhost, localhost:80, localhost:443 {
+	root * ..\Html
+	file_server
 }
-

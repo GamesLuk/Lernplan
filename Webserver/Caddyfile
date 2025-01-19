@@ -1,4 +1,11 @@
-:80
+localhost:80 {
 
 root * ..\Html
 file_server
+}
+
+localhost {
+
+root * ..\Html
+file_server
+}

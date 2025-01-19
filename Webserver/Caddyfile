@@ -1,11 +1,5 @@
-localhost:80 {
-
-root * ..\Html
-file_server
+localhost:2015, localhost {
+    root * ..\Html
+    file_server
 }
 
-localhost {
-
-root * ..\Html
-file_server
-}

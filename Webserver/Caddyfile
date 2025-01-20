@@ -8,11 +8,9 @@ mzb-lev.de {
 	file_server
 }
 
-localhost:8080 {
+localhost:8080, 192.168.178.33:8080, 192.168.178.105:8080 {
 	root * ../Html
 	file_server
 }
 
-localhost:2015 {
-    reverse_proxy localhost:8080
-}
+

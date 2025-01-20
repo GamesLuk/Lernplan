@@ -1,4 +1,4 @@
-localhost {
+mzb-lev.de {
     root * ../Html
     file_server
 }

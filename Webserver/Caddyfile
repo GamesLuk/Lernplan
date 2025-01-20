@@ -1,5 +1,13 @@
+{
+	http_port 8080
+	https_port 433
+}
+
 mzb-lev.de {
 	tls {
+
+		# evt auch statt dns einfach email angeben: tls <email>
+
 		dns cloudflare {
 			api_token "B42raYn3HVJyspB9c_C4M6Nt_367h-uhQApYfD8E"
 		}
@@ -8,9 +16,5 @@ mzb-lev.de {
 	file_server
 }
 
-localhost:8080, 192.168.178.33, 192.168.178.105 {
-	root * ../Html
-	file_server
-}
 
 

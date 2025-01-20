@@ -1,22 +1,4 @@
-{
-
+localhost {
+    root * ../Html
+    file_server
 }
-
-localhost, 192.168.178.105, 192.168.178.105:60, 192.168.178.105:80 {
-	respond "Port"
-
-	#tls your-email@example.com
-}
-
-#localhost:2015, localhost, localhost:80, localhost:443 {
-#	root * ..\Html
-#	file_server
-#}
-
-#192.168.178.105:2015, 192.168.178.105, 192.168.178.105:80, 192.168.178.105:443 {
-#	respond "192.168.178.105"
-#}
-#
-#62.143.244.74:2015, 62.143.244.74:80, 62.143.244.74:443 {
-#	respond "62.143.244.74"
-#}

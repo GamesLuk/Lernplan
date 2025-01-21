@@ -15,8 +15,3 @@ mzb-lev.de {
     root * ../Html
 	file_server
 }
-
-localhost:8080 {
-	root * ../Html
-	file_server
-}

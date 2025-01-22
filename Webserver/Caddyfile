@@ -5,13 +5,10 @@
 
 mzb-lev.de {
 	tls {
-
-		# evt auch statt dns einfach email angeben: tls <email>
-
 		dns cloudflare {
 			api_token "B42raYn3HVJyspB9c_C4M6Nt_367h-uhQApYfD8E"
 		}
 	}
-    root * ../Html
+	root * ../Html
 	file_server
 }

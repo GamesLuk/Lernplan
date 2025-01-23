@@ -1,0 +1,26 @@
+Main:
+- Id
+- Benutzername
+- Passwort (Verschlüsselt)
+- Vorname
+- Nachname
+- Gaburtsdatum
+- Stufe
+- Klasse
+- Fehlstunden
+- Unentschuldigte
+
+Profil:
+- id
+- gewählt
+- war drinne
+- lernzeit
+- time
+- stunde
+
+System:
+- jahr
+
+Lernzeiten:
+- Plätze
+- Besetzt

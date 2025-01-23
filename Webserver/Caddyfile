@@ -3,18 +3,20 @@
 	http_port 8080
 	https_port 443
 }
-
 mzb-lev.de {
 	tls {
 		dns cloudflare {
 			api_token "B42raYn3HVJyspB9c_C4M6Nt_367h-uhQApYfD8E"
 		}
 	}
-	root * ../Html
+	#root * ../Html
+	root * ../Laravel/public
+	php_fastcgi 127.0.0.1:9000
 	file_server
 }
 localhost {
 	tls internal
-	root * ../Html
+	root * ../Laravel/public
+	php_fastcgi 127.0.0.1:9000
 	file_server
 }

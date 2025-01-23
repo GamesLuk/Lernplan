@@ -3,7 +3,7 @@ This is our repository for our computer science project in HTML.
 
 -----------------------------------------------------
 
-Public ip:      lernplan.ddns.net
+Public Domaine: mzb-lev.de
 
 MySQL:
 - Root - PW:    dBT3ZF@xD4gUn^#bzwvP

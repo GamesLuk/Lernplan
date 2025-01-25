@@ -1,1 +1,13 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
+{% block content %}
+
+<ul>
+{% for user in data %}
+<li>
+    {{ user.name }}: {{ user.age }}
+</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

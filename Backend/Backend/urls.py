@@ -1,3 +1,4 @@
+from .settings import DEBUG
 """
 URL configuration for Backend project.
 
@@ -19,5 +20,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("app/", include("demo.urls"))
+    path("", include("demo.urls"))
 ]
+
+if DEBUG:
+    urlpatterns = [
+        path('__debug__/', include('debug_toolbar.urls')),
+    ] + urlpatterns

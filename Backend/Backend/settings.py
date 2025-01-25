@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     "demo",
 ]
 
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Backend.urls'
@@ -76,8 +78,13 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lernplan',  # Name der Datenbank
+        'USER': 'System',     # MySQL-Benutzername
+        'PASSWORD': '5f7%@#gj8J&Sqeu3YjGq',  # MySQL-Passwort
+        'HOST': 'localhost',  # MySQL-Host (standardmäßig localhost)
+        'PORT': '3306',       # MySQL-Port (standardmäßig 3306)
+        'CONN_MAX_AGE': 300,  # Verbindungen bleiben 5 Minuten offen
     }
 }
 
@@ -122,3 +129,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INTERNAL_IPS = [
+    '127.0.0.1',  # Lokale IP-Adresse
+]

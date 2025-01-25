@@ -9,14 +9,10 @@ mzb-lev.de {
 			api_token "B42raYn3HVJyspB9c_C4M6Nt_367h-uhQApYfD8E"
 		}
 	}
-	#root * ../Html
-	root * ../Laravel/public
-	php_fastcgi 127.0.0.1:9000
+	reverse_proxy localhost:8000
 	file_server
 }
 localhost {
 	tls internal
-	root * ../Laravel/public
-	php_fastcgi 127.0.0.1:9000
 	file_server
 }

@@ -84,7 +84,7 @@ DATABASES = {
         'PASSWORD': '5f7%@#gj8J&Sqeu3YjGq',  # MySQL-Passwort
         'HOST': 'localhost',  # MySQL-Host (standardmäßig localhost)
         'PORT': '3306',       # MySQL-Port (standardmäßig 3306)
-        'CONN_MAX_AGE': 300,  # Verbindungen bleiben 5 Minuten offen
+        'CONN_MAX_AGE': 600,  # Verbindungen bleiben 5 Minuten offen
     }
 }
 
@@ -132,4 +132,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [
     '127.0.0.1',  # Lokale IP-Adresse
+]
+
+ALLOWED_HOSTS = [
+    "mzb-lev.de",
+    "localhost",
 ]

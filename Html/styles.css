@@ -1,0 +1,129 @@
+h1 {
+    font-size: xx-large;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font-size:xx-large;
+
+
+    
+   }
+            .obere-ecke {
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+            .container {
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               width: 100%;
+           }
+           .links {
+               text-align: left;
+           }
+           .zentriert {
+               text-align: center;
+               flex-grow: 1;
+           }
+           .rechts {
+               text-align: right;
+           }
+           .starttext {
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+           }
+           .button1 {
+            display: inline-block; 
+            padding: 2% 4%;    
+            background-color: #105c10; 
+            color: #ffffff;        
+            text-decoration: none;  
+            border: none;           
+            border-radius: 5%;     
+            font-size: 200%;        
+            text-align: center;     
+            cursor: pointer;        
+            transition: background-color 0.3s ease; 
+        }
+            .button2 {
+            display: inline-block; 
+            padding: 2% 4%;    
+            background-color: #5c1010; 
+            color: #ffffff;        
+            text-decoration: none;  
+            border: none;           
+            border-radius: 5%;     
+            font-size: 200%;        
+            text-align: center;     
+            cursor: pointer;        
+            transition: background-color 0.3s ease; 
+            }
+            .button21 {
+                display: inline-block; 
+                padding: 1% 2%;    
+                background-color: #5c1010; 
+                color: #ffffff;        
+                text-decoration: none;  
+                border: none;           
+                border-radius: 5%;     
+                font-size: 200%;        
+                text-align: center;     
+                cursor: pointer;        
+                transition: background-color 0.3s ease; 
+            }
+            .button3 {
+                display: inline-block; 
+                padding: 2% 2%;    
+                background-color: #ff0000; 
+                color: #000000;        
+                text-decoration: none;  
+                border: none;           
+                border-radius: 5%;     
+                font-size: 100%;        
+                text-align: center;     
+                cursor: pointer;        
+                transition: background-color 0.3s ease; 
+            }
+            .button:hover {
+            background-color: #0056b3; 
+        }
+            .wichtig {
+                font-size: xxx-large;
+                color: #ff0000;
+                font-weight: 700;
+                text-align: center;
+            }
+            .form-container {
+                width: 300px;
+                margin: auto;
+                padding: 40px;
+                background: #23f8ff;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                text-align: center;
+              }
+              input {
+                width: 100%;
+                padding: relative;
+                margin: 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                color: #333
+              }
+             
+              
+              
+              
+        
+
+body {
+    background-color: honeydew;
+
+    
+}
+
+
+
+    

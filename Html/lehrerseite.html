@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lehrer</title>
+</head>
+<body>
+    <div class="obere-ecke"><div class="button3"><a href="/seiteschließen.html">X</a></div></div>
+    <div class="container">
+        <div class="links">
+            <!--DATE-->20.01.2025<!--/DATE-->
+        </div>
+        <div class="zentriert">
+            <h1>LernPlan</h1>
+        </div>
+        <div class="rechts">
+            <img src="LogoLernPlan.png" width="80" height="80" alt="LernPlan Logo">
+        </div>
+    </div>
+    <br>
+    <h1>Willkommen auf unserer Website!
+        <br> Hier können Sie Lernzeiten, die Sie anbieten wollen, hinzufügen:
+    </h1>
+    <br>
+    <form id="addOptionForm">
+        <label for="newOption">Neue Antwortoption:</label>
+        <input type="text" id="newOption" required>
+        <button type="submit">Hinzufügen</button>
+      </form>
+    
+      <h2>Vorhandene Optionen:</h2>
+      <ul id="optionsList"></ul>
+    
+      <script>
+
+        const optionsList = document.getElementById("optionsList");
+        const options = JSON.parse(localStorage.getItem("pollOptions")) || [];
+    
+
+        function renderOptions() {
+          optionsList.innerHTML = "";
+          options.forEach(option => {
+            const li = document.createElement("li");
+            li.textContent = option;
+            optionsList.appendChild(li);
+          });
+        }
+    
+        renderOptions();
+    
+
+        document.getElementById("addOptionForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+          const newOption = document.getElementById("newOption").value.trim();
+          if (newOption) {
+            options.push(newOption);
+            localStorage.setItem("pollOptions", JSON.stringify(options));
+            renderOptions();
+            document.getElementById("newOption").value = "";
+          }
+        });
+      </script>
+</body>
+</html>

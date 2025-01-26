@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "main.apps.MainConfig",
+    "auth.apps.AuthConfig",
+    'django.contrib.sites',              # Notwendig für allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.microsoft',  # Microsoft-Provider
 ]
 
 MIDDLEWARE = [
@@ -136,3 +142,8 @@ ALLOWED_HOSTS = [
     "mzb-lev.de",
     "localhost",
 ]
+
+LOGIN_REDIRECT_URL = "/home"
+LOGOUT_REDIRECT_URL = "/login"
+
+SIDE_ID = 1

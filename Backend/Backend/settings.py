@@ -37,13 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',        # ^ Preset
-    "users",    # App
     "main",
-    'django.contrib.sites',              # Allauth
-    'allauth',                           # Allauth
-    'allauth.account',                   # Allauth
-    'allauth.socialaccount',             # Allauth
-    'allauth.socialaccount.providers.microsoft',  # Microsoft-Provider für Login
 ]
 
 MIDDLEWARE = [
@@ -52,7 +46,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    "allauth.account.middleware.AccountMiddleware",     # Microsoft - Neu
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -144,24 +137,3 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
-
-SITE_ID = 1
-
-SOCIALACCOUNT_PROVIDERS = {
-    'microsoft': {
-        'APP': {
-            'client_id': 'c6cb3ad8-1a5e-4a74-98b5-a35ddd029c31',
-            'secret': '7c47fe62-9667-442b-b3df-894a53ab352f',
-            'key': '',
-        },
-        'AUTH_PARAMS': {
-            'scope': 'email openid profile',
-        },
-    }
-}
-
-LOGIN_REDIRECT_URL = 'home/'  # Nach dem Login hierhin weiterleiten
-ACCOUNT_LOGOUT_REDIRECT_URL = 'home/'  # Nach Logout hierhin weiterleiten
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  # Authentifizierung nur über E-Mail
-ACCOUNT_EMAIL_REQUIRED = True  # E-Mail-Adresse erforderlich
-ACCOUNT_USERNAME_REQUIRED = False  # Kein Benutzername notwendig

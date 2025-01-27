@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',        # ^ Preset
     "users",    # App
+    "main",
     'django.contrib.sites',              # Allauth
     'allauth',                           # Allauth
     'allauth.account',                   # Allauth
@@ -159,8 +160,8 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/'  # Nach dem Login hierhin weiterleiten
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # Nach Logout hierhin weiterleiten
+LOGIN_REDIRECT_URL = 'home/'  # Nach dem Login hierhin weiterleiten
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home/'  # Nach Logout hierhin weiterleiten
 ACCOUNT_AUTHENTICATION_METHOD = 'email'  # Authentifizierung nur über E-Mail
 ACCOUNT_EMAIL_REQUIRED = True  # E-Mail-Adresse erforderlich
 ACCOUNT_USERNAME_REQUIRED = False  # Kein Benutzername notwendig

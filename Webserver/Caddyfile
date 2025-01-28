@@ -16,3 +16,12 @@ localhost {
 	tls internal
 	file_server
 }
+*.mzb-lev.de {
+	tls {
+		dns cloudflare {
+			api_token "B42raYn3HVJyspB9c_C4M6Nt_367h-uhQApYfD8E"
+		}
+	}
+	reverse_proxy localhost:8000
+	file_server
+}

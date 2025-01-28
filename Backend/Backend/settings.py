@@ -25,9 +25,6 @@ SECRET_KEY = 'django-insecure-o)0dt!(f2+)#crrn&s_(bnhgz27qlun=4)!&ar$^@f^fzraq%w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,12 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',        # ^ Preset
     "main",
+    "auth_user"
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "auth_user.middleware.MultipleProxyMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -134,6 +133,12 @@ INTERNAL_IPS = [
 
 ALLOWED_HOSTS = [
     "mzb-lev.de",
+    ".mzb-lev.de",
     "localhost",
     "127.0.0.1",
 ]
+
+USE_X_FORWARDED_HOST = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+

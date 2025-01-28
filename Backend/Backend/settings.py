@@ -142,3 +142,10 @@ USE_X_FORWARDED_HOST = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+MICROSOFT_CLIENT_ID = 'c6cb3ad8-1a5e-4a74-98b5-a35ddd029c31'
+MICROSOFT_CLIENT_SECRET = '7c47fe62-9667-442b-b3df-894a53ab352f'
+MICROSOFT_REDIRECT_URI = 'https://mzb-lev.de/accounts/callback/'
+MICROSOFT_AUTHORIZATION_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
+MICROSOFT_TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+MICROSOFT_USER_INFO_URL = 'https://graph.microsoft.com/v1.0/me'
+

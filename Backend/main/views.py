@@ -13,3 +13,6 @@ def main(request):
     if host.startswith("admin."):
         return redirect("admin:login")
     return redirect("/home/")
+
+def inside(request):
+    return render(request, "inside.html")

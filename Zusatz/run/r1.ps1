@@ -1,0 +1,1 @@
+cloudflared tunnel --loglevel debug run lernplan-tunnel

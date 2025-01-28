@@ -22,7 +22,7 @@ def microsoft_login(request):
 def microsoft_callback(request):
     code = request.GET.get('code')
     if not code:
-        return render(request, 'error.html', {'message': 'No code returned from Microsoft'})
+        return redirect("main:home")
 
     # Zugriffstoken abrufen
     token_data = {
@@ -45,6 +45,16 @@ def microsoft_callback(request):
     request.session['user'] = {
         'name': user_info.get('displayName'),
         'email': user_info.get('mail') or user_info.get('userPrincipalName'),
+        "role": None,
     }
 
-    return redirect('/home/inside')
+    request.session["logged_in"] = True
+
+    if request.session.get("requested_url") != None:
+        requested_url = request.session.get("requested_url")
+        return redirect(requested_url)
+    return redirect('main:home')
+
+def logout(request):
+    request.session.flush()  # Löscht alle Sitzungsdaten
+    return redirect('main:home')

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import admin
 from django.http import HttpResponse
 import requests
+from auth_user.decorators import login_required, role_required
 
 # Create your views here.
 
@@ -15,4 +16,5 @@ def main(request):
     return redirect("/home/")
 
 def inside(request):
+    request.session["requested_url"] = request.get_host()
     return render(request, "inside.html")

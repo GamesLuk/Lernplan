@@ -7,8 +7,6 @@ from system_control.models import StudentProfile
 from utils.system import debug
 
 
-# Create your views here.
-
 def microsoft_login(request):
     params = {
         'client_id': settings.MICROSOFT_CLIENT_ID,
@@ -21,6 +19,8 @@ def microsoft_login(request):
     return redirect(url)
 
 
+#-----------------------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------------------------------------------------------#
 
 def microsoft_callback(request):
     code = request.GET.get('code')
@@ -42,7 +42,7 @@ def microsoft_callback(request):
 
 
 
-    #------------------------------------ Abrufen ------------------------------------------------------#
+    #----------------------------------------------------- Abrufen ------------------------------------------------------#
 
     # Benutzerinformationen abrufen
     access_token = token_response_data.get('access_token')
@@ -81,13 +81,17 @@ def microsoft_callback(request):
     debug(["User Info:", user_info])
 
 
-    #----------------------------------------- Speicherung -----------------------------------------------------------------------#
+    #--------------------------------------------------- Speicherung -----------------------------------------------------------------#
 
     allowed_organisations = settings.SCHUL_IDS
 
+    
+    # Wenn die User auf Schule geprüft werden und nicht dazugehören, wird der User redirectet und der Login-Vorgang abgebrochen
     if settings.CHECK_SCHUL_IDS == True and not any(org['id'] in allowed_organisations for org in organisation_info.get('value', [])):
         return redirect("main:welcome")
     
+
+    # Speicherung der Daten in der Session
     request.session['user'] = {
         "school_ID": 1,                                                         # 10000, 10001, ...
         'name': user_info.get('displayName'),                                   # Voller Name
@@ -100,6 +104,7 @@ def microsoft_callback(request):
 
     }
 
+    # Ausgabe der Email bei DEBUG
     debug([request.session.get("user").get("email")])
 
 
@@ -142,6 +147,9 @@ def microsoft_callback(request):
 
 
 
+
+    #------------------------------------------------------ Verarbeiten --------------------------------------------------------#
+
     # Einloggen
     set_Session_Value(request, "logged_in", True)
 
@@ -154,6 +162,8 @@ def microsoft_callback(request):
         return redirect(requested_url)
     return redirect('main:home')
 
+    #-----------------------------------------------------------------------------------------------------------------------------#
+    #-----------------------------------------------------------------------------------------------------------------------------#
 
 
 def logout(request):

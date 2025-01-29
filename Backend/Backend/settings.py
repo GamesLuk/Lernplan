@@ -28,22 +28,22 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',        # ^ Preset
-    "main",
-    "auth_user",
-    "system_control",
+    'django.contrib.admin',             # Preset
+    'django.contrib.auth',              # Preset
+    'django.contrib.contenttypes',      # Preset
+    'django.contrib.sessions',          # Preset
+    'django.contrib.messages',          # Preset
+    'django.contrib.staticfiles',       # Preset
+    "main",                             # App
+    "auth_user",                        # App
+    "system_control",                   # App
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    "middleware.system_middleware.MultipleProxyMiddleware",
+    "middleware.system_middleware.MultipleProxyMiddleware",     # Host-Erkennung
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -134,14 +134,14 @@ INTERNAL_IPS = [
 
 ALLOWED_HOSTS = [
     "mzb-lev.de",
-    ".mzb-lev.de",
+    ".mzb-lev.de",      # Alle Subdomains
     "localhost",
     "127.0.0.1",
 ]
 
-USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_HOST = True                                     # Für Host-Erkennung
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # Für Host-Erkennung
 
 MICROSOFT_CLIENT_ID = 'c6cb3ad8-1a5e-4a74-98b5-a35ddd029c31'
 MICROSOFT_CLIENT_SECRET = '7c47fe62-9667-442b-b3df-894a53ab352f'
@@ -150,17 +150,19 @@ MICROSOFT_AUTHORIZATION_URL = 'https://login.microsoftonline.com/common/oauth2/v
 MICROSOFT_TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 MICROSOFT_USER_INFO_URL = 'https://graph.microsoft.com/v1.0/me'
 
-SCOPES = [
-    "openid",
-    "email",
-    "profile",
-    "offline_access",
+SCOPES = [                      # Für Microsoft-Login (Berechtigungen)
+    "openid",                   # Save
+    "email",                    # Save
+    "profile",                  # Save
+    "offline_access",           # Save
     "User.Read",
+    "Team.ReadBasic.All",
     "User.ReadBasic.All",
-    "GroupMember.Read.All",
-    "Directory.Read.All",
-    "Teams.ReadBasic.All",
-    "User.Read.All"
+    "Directory.Read.All",       # evt Falsch
+    "GroupMember.Read.All",     # evt Falsch
+    "TeamMember.Read.All",      # evt Falsch
+    "User.Read.All",            # evt Falsch
+
 ]
 
 
@@ -171,4 +173,4 @@ REQUESTED_URL_NAME = "requested_url_dfg"
 
 SCHUL_IDS = []
 
-CHECK_SCHUL_IDS = False
+CHECK_SCHUL_IDS = False     # Default: TRUE | Test: FALSE

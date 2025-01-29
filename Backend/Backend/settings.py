@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    "auth_user.middleware.MultipleProxyMiddleware",
+    "middleware.system_middleware.MultipleProxyMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -149,3 +149,18 @@ MICROSOFT_AUTHORIZATION_URL = 'https://login.microsoftonline.com/common/oauth2/v
 MICROSOFT_TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 MICROSOFT_USER_INFO_URL = 'https://graph.microsoft.com/v1.0/me'
 
+SCOPES = [
+    'User.Read',
+    'GroupMember.Read.All',
+    'Directory.Read.All'
+]
+
+
+
+# ----------------------------------------------------------------------------------------------------
+
+REQUESTED_URL_NAME = "requested_url_dfg"
+
+SCHUL_IDS = []
+
+CHECK_SCHUL_IDS = False

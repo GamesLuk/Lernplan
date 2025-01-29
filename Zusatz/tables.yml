@@ -1,10 +1,8 @@
 Main:
 - Id
-- Benutzername
-- Passwort (Verschlüsselt)
+- Email
 - Vorname
 - Nachname
-- Geburtsdatum
 - Stufe
 - Klasse
 - Fehlstunden

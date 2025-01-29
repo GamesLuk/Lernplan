@@ -2,6 +2,7 @@ import requests
 from django.conf import settings
 from django.shortcuts import redirect, render
 from urllib.parse import urlencode
+from utils.session import set_Session_Value, get_Session_Value
 
 
 # Create your views here.
@@ -35,26 +36,78 @@ def microsoft_callback(request):
     token_response = requests.post(settings.MICROSOFT_TOKEN_URL, data=token_data)
     token_response_data = token_response.json()
 
+
+
+
+
+
+    #------------------------------------ Abrufen ------------------------------------------------------#
+
     # Benutzerinformationen abrufen
     access_token = token_response_data.get('access_token')
     headers = {'Authorization': f'Bearer {access_token}'}
     user_info_response = requests.get(settings.MICROSOFT_USER_INFO_URL, headers=headers)
     user_info = user_info_response.json()
 
-    # Beispiel: Benutzerinformationen in der Session speichern
+
+    # Benutzer-Teams abfragen
+    teams_response = requests.get(f"https://graph.microsoft.com/v1.0/me/joinedTeams", headers=headers)
+    teams_info = teams_response.json()
+
+
+    # Benutzer-Gruppenmitgliedschaften abfragen
+    group_memberships_response = requests.get(f"https://graph.microsoft.com/v1.0/me/memberOf", headers=headers)
+    group_memberships_info = group_memberships_response.json()
+
+
+     # Benutzerprofilbild abfragen
+    profile_picture_response = requests.get(f"https://graph.microsoft.com/v1.0/me/photo/$value", headers=headers)
+    # Benutzerprofilbild prüfen
+    if profile_picture_response.status_code == 200:
+        profile_picture = profile_picture_response.content
+    else:
+        profile_picture = None  # Wenn kein Profilbild vorhanden ist, auf None setzen
+
+
+    # Benutzer- und Organisationsinformationen abfragen
+    tenant_id = user_info.get('id')  # ID des Benutzers
+    organisation_response = requests.get(f"https://graph.microsoft.com/v1.0/users/{tenant_id}/memberOf", headers=headers)
+    organisation_info = organisation_response.json()
+
+
+
+
+    #----------------------------------------- Speicherung -----------------------------------------------------------------------#
+
+    allowed_organisations = settings.SCHUL_IDS
+
+    if settings.CHECK_SCHUL_IDS == True and not any(org['id'] in allowed_organisations for org in organisation_info.get('value', [])):
+        return redirect("main:welcome")
+    
     request.session['user'] = {
         'name': user_info.get('displayName'),
         'email': user_info.get('mail') or user_info.get('userPrincipalName'),
-        "role": None,
+        'role': None,
+        'tenant_id': tenant_id,  # Speichern der Tenant-ID
+        'teams': teams_info.get('value', []),  # Teams des Benutzers
+        'groups': group_memberships_info.get('value', []),  # Gruppenmitgliedschaften
+        'profile_picture': profile_picture,  # Profilbild
     }
 
-    request.session["logged_in"] = True
+    # Einloggen
+    set_Session_Value(request, "logged_in", True)
 
-    if request.session.get("requested_url") != None:
-        requested_url = request.session.get("requested_url")
+    
+    # Verarbeitung
+    requested_url = get_Session_Value(request, settings.REQUESTED_URL_NAME)
+
+    if requested_url != None:
+        set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         return redirect(requested_url)
     return redirect('main:home')
 
+
+
 def logout(request):
     request.session.flush()  # Löscht alle Sitzungsdaten
-    return redirect('main:home')
+    return redirect('main:welcome')

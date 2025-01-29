@@ -1,20 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib import admin
 from django.http import HttpResponse
-import requests
-from auth_user.decorators import login_required, role_required
+from decorators.permissions import login_required, role_required
+from utils.session import set_Session_Value, get_Session_Value
+from django.conf import settings
+
 
 # Create your views here.
 
-def home(request):
-    return render(request, "home.html")
+def welcome(request):
+    return render(request, "basic/welcome.html")
 
 def main(request):
     host = request.get_host()
     if host.startswith("admin."):
         return redirect("admin:login")
-    return redirect("/home/")
+    return redirect("main:welcome")
 
-def inside(request):
-    request.session["requested_url"] = request.get_host()
-    return render(request, "inside.html")
+def home(request):
+
+    set_Session_Value(request, settings.REQUESTED_URL_NAME, "main:home")
+
+    @login_required
+    def home(request):
+        return render(request, "basic/home.html")
+    
+    return home(request)
+

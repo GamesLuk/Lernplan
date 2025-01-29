@@ -1,5 +1,6 @@
 from system.models import system
 from django.conf import settings
+from datetime import datetime
 
 def getSchool_ID():
     id = system.objects.filter(name="ID").values("value").first()
@@ -19,3 +20,12 @@ def getSchool_ID():
 def debug(message):
     for text in message:
         print(text)
+
+def getKlasse(school_ID):
+    month = datetime.now().month
+    day = datetime.now().day
+
+    if month >= 8:
+        year = datetime.now().year + "-" + (datetime.now().year + 1)
+    else:
+        year = (datetime.now().year - 1) + "-" + datetime.now().year

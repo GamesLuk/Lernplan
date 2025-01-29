@@ -1,4 +1,4 @@
-from system_control.models import system
+from system.models import system
 from django.conf import settings
 
 def getSchool_ID():

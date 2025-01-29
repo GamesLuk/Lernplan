@@ -3,7 +3,7 @@ from django.conf import settings
 from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
-from system_control.models import StudentProfile
+from system.models import StudentProfile
 from utils.system import debug
 
 

@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',       # Preset
     "main",                             # App
     "auth_user",                        # App
-    "system_control",                   # App
+    "system",                           # App
 ]
 
 MIDDLEWARE = [

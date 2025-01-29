@@ -24,8 +24,7 @@ def home(request):
 
     @login_required
     def home(request):
-        school_ID = getSchool_ID()
-        return render(request, "basic/home.html", {'school_ID': school_ID})
+        return render(request, "basic/home.html")
     
     return home(request)
 

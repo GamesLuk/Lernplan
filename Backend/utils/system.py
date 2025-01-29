@@ -1,4 +1,5 @@
 from system_control.models import system
+from django.conf import settings
 
 def getSchool_ID():
     id = system.objects.filter(name="ID").values("value").first()
@@ -14,3 +15,7 @@ def getSchool_ID():
         value=int(school_ID) + 1
     )
     return school_ID
+
+def debug(message):
+    for text in message:
+        print(text)

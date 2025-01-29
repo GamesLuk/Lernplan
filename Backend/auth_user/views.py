@@ -89,28 +89,52 @@ def microsoft_callback(request):
         return redirect("main:welcome")
     
     request.session['user'] = {
-        'name': user_info.get('displayName'),
-        'email': user_info.get('mail') or user_info.get('userPrincipalName'),
-        'role': None,
-        'teams': teams_info.get('value', []),  # Teams des Benutzers
-        'profile_picture': profile_picture,  # Profilbild
+        "school_ID": 1,                                                         # 10000, 10001, ...
+        'name': user_info.get('displayName'),                                   # Voller Name
+        'profile_picture': profile_picture,                                     # Profilbild
+        'teams': teams_info.get('value', []),                                   # Teams des Benutzers
+        'email': user_info.get('mail') or user_info.get('userPrincipalName'),   # Email
+        "klasse": 1,                                                            # a,b,c,d,e, ...
+        "stufe": 1,                                                             # 5,6,7,8,9, ...
+        'role': 1,                                                              # Schüler, Lehrer, Admin, ...
+
     }
 
     debug([request.session.get("user").get("email")])
 
-    student_profile, created = StudentProfile.objects.update_or_create(
-        email=user_info.get('mail') or user_info.get('userPrincipalName'),
+
+    # Speicherung der Daten in der Datenbank
+    # Prüfen, ob Profil schon besteht
+    student_profile, created = StudentProfile.objects.get_or_create(
+
+        email=user_info.get("mail") or user_info.get('userPrincipalName'),          # Prüfen über Email
         defaults={
-            "school_ID": 1,
-            'name': user_info.get('displayName') or 1,
-            'profile_picture': profile_picture or 1,
+                                                                                    # Wenn nicht, dann Profil erstellen
+            "school_ID": 1,                                                         
+            'name': user_info.get('displayName'),
+            'profile_picture': profile_picture,
             'teams': teams_info.get('value', []),
-            "email": user_info.get("mail") or user_info.get('userPrincipalName') or 1,
+            "email": user_info.get("mail") or user_info.get('userPrincipalName'),
             "klasse": 1,
             "stufe": 1,
+            "role": 1,
+
         }
     )
 
+    # Falls Profil schon existiert, aktualisieren
+    if not created:
+        StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
+
+            profile_picture = profile_picture,          # Anderen Paramater werden sich nie ändern
+            teams = teams_info.get('value', []),
+            klasse = 1,
+            stufe = 1,
+            role = 1,
+
+        )
+
+    # DEBUG zur Kontrolle der Antworten von Microsoft
     debug(["Student Profile Created:", created])
     debug(["Teams Response:", teams_info])
     debug(["Group Memberships Response:", group_memberships_info])

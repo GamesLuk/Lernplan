@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
 from system_control.models import StudentProfile
+from utils.system import debug
 
 
 # Create your views here.
@@ -37,8 +38,7 @@ def microsoft_callback(request):
     token_response = requests.post(settings.MICROSOFT_TOKEN_URL, data=token_data)
     token_response_data = token_response.json()
 
-
-
+    debug(["Token Response:", token_response_data])
 
 
 
@@ -49,6 +49,9 @@ def microsoft_callback(request):
     headers = {'Authorization': f'Bearer {access_token}'}
     user_info_response = requests.get(settings.MICROSOFT_USER_INFO_URL, headers=headers)
     user_info = user_info_response.json()
+
+    debug(["User Info Response:", user_info_response.status_code, user_info_response.json()])
+
 
     # Benutzer-Teams abfragen
     teams_response = requests.get(f"https://graph.microsoft.com/v1.0/me/joinedTeams", headers=headers)
@@ -75,6 +78,7 @@ def microsoft_callback(request):
     organisation_info = organisation_response.json()
 
 
+    debug(["User Info:", user_info])
 
 
     #----------------------------------------- Speicherung -----------------------------------------------------------------------#
@@ -92,7 +96,7 @@ def microsoft_callback(request):
         'profile_picture': profile_picture,  # Profilbild
     }
 
-    print(request.session.get("user").get("email"))
+    debug([request.session.get("user").get("email")])
 
     student_profile, created = StudentProfile.objects.update_or_create(
         email=user_info.get('mail') or user_info.get('userPrincipalName'),
@@ -106,6 +110,13 @@ def microsoft_callback(request):
             "stufe": 1,
         }
     )
+
+    debug(["Student Profile Created:", created])
+    debug(["Teams Response:", teams_info])
+    debug(["Group Memberships Response:", group_memberships_info])
+    debug(["Session Data:", request.session.get('user')])
+
+
 
     # Einloggen
     set_Session_Value(request, "logged_in", True)

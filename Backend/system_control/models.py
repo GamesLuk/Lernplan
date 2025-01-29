@@ -16,6 +16,7 @@ class StudentProfile(models.Model):
     teams = models.JSONField(default=list, db_index=True)  # Speichert eine Liste der Teams des Benutzers
     klasse = models.CharField(max_length=1, db_index=True)
     stufe = models.IntegerField(db_index=True)
+    role = models.CharField(max_length=50, db_index=True)
 
     def __str__(self):
         return self.name

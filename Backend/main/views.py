@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from decorators.permissions import login_required, role_required
 from utils.session import set_Session_Value, get_Session_Value
 from django.conf import settings
+from utils.system import getSchool_ID
 
 
 # Create your views here.
@@ -23,7 +24,8 @@ def home(request):
 
     @login_required
     def home(request):
-        return render(request, "basic/home.html")
+        school_ID = getSchool_ID()
+        return render(request, "basic/home.html", {'school_ID': school_ID})
     
     return home(request)
 

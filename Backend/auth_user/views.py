@@ -3,6 +3,7 @@ from django.conf import settings
 from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
+from system_control.models import StudentProfile
 
 
 # Create your views here.
@@ -13,7 +14,7 @@ def microsoft_login(request):
         'response_type': 'code',
         'redirect_uri': settings.MICROSOFT_REDIRECT_URI,
         'response_mode': 'query',
-        'scope': 'openid email profile offline_access',
+        'scope': ' '.join(settings.SCOPES),  # Nutze die Scopes aus den Settings
     }
     url = f"{settings.MICROSOFT_AUTHORIZATION_URL}?{urlencode(params)}"
     return redirect(url)
@@ -48,7 +49,6 @@ def microsoft_callback(request):
     headers = {'Authorization': f'Bearer {access_token}'}
     user_info_response = requests.get(settings.MICROSOFT_USER_INFO_URL, headers=headers)
     user_info = user_info_response.json()
-
 
     # Benutzer-Teams abfragen
     teams_response = requests.get(f"https://graph.microsoft.com/v1.0/me/joinedTeams", headers=headers)
@@ -88,11 +88,24 @@ def microsoft_callback(request):
         'name': user_info.get('displayName'),
         'email': user_info.get('mail') or user_info.get('userPrincipalName'),
         'role': None,
-        'tenant_id': tenant_id,  # Speichern der Tenant-ID
         'teams': teams_info.get('value', []),  # Teams des Benutzers
-        'groups': group_memberships_info.get('value', []),  # Gruppenmitgliedschaften
         'profile_picture': profile_picture,  # Profilbild
     }
+
+    print(request.session.get("user").get("email"))
+
+    student_profile, created = StudentProfile.objects.update_or_create(
+        email=user_info.get('mail') or user_info.get('userPrincipalName'),
+        defaults={
+            "school_ID": 1,
+            'name': user_info.get('displayName') or 1,
+            'profile_picture': profile_picture or 1,
+            'teams': teams_info.get('value', []),
+            "email": user_info.get("mail") or user_info.get('userPrincipalName') or 1,
+            "klasse": 1,
+            "stufe": 1,
+        }
+    )
 
     # Einloggen
     set_Session_Value(request, "logged_in", True)

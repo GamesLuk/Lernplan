@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',        # ^ Preset
     "main",
-    "auth_user"
+    "auth_user",
+    "system_control",
 ]
 
 MIDDLEWARE = [
@@ -150,9 +151,16 @@ MICROSOFT_TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/toke
 MICROSOFT_USER_INFO_URL = 'https://graph.microsoft.com/v1.0/me'
 
 SCOPES = [
-    'User.Read',
-    'GroupMember.Read.All',
-    'Directory.Read.All'
+    "openid",
+    "email",
+    "profile",
+    "offline_access",
+    "User.Read",
+    "User.ReadBasic.All",
+    "GroupMember.Read.All",
+    "Directory.Read.All",
+    "Teams.ReadBasic.All",
+    "User.Read.All"
 ]
 
 

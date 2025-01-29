@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.StudentProfile)
 admin.site.register(models.system)
+admin.site.register(models.LernzeitProfile)

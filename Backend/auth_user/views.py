@@ -4,7 +4,8 @@ from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
 from system.models import StudentProfile
-from utils.system import debug
+from utils.system import debug, getSchool_ID
+import base64
 
 
 def microsoft_login(request):
@@ -81,6 +82,13 @@ def microsoft_callback(request):
     debug(["User Info:", user_info])
 
 
+    # Encoden der Bilddatei
+
+    # Angenommen, 'image_bytes' ist die bytes-Daten, die du speichern möchtest
+    base64_encoded = base64.b64encode(profile_picture).decode('utf-8')
+
+
+
     #--------------------------------------------------- Speicherung -----------------------------------------------------------------#
 
     allowed_organisations = settings.SCHUL_IDS
@@ -91,11 +99,14 @@ def microsoft_callback(request):
         return redirect("main:welcome")
     
 
+    school_ID = getSchool_ID()
     # Speicherung der Daten in der Session
     request.session['user'] = {
-        "school_ID": 1,                                                         # 10000, 10001, ...
+        "school_ID": school_ID,                                                         # 10000, 10001, ...
         'name': user_info.get('displayName'),                                   # Voller Name
-        'profile_picture': profile_picture,                                     # Profilbild
+        "first_name":user_info.get("givenName"),
+        "last_name": user_info.get("surname"),
+        'profile_picture': base64_encoded,                                     # Profilbild
         'teams': teams_info.get('value', []),                                   # Teams des Benutzers
         'email': user_info.get('mail') or user_info.get('userPrincipalName'),   # Email
         "klasse": 1,                                                            # a,b,c,d,e, ...
@@ -115,9 +126,11 @@ def microsoft_callback(request):
         email=user_info.get("mail") or user_info.get('userPrincipalName'),          # Prüfen über Email
         defaults={
                                                                                     # Wenn nicht, dann Profil erstellen
-            "school_ID": 1,                                                         
+            "school_ID": school_ID,
             'name': user_info.get('displayName'),
-            'profile_picture': profile_picture,
+            "first_name":user_info.get("givenName"),
+            "last_name": user_info.get("surname"),
+            'profile_picture': base64_encoded,
             'teams': teams_info.get('value', []),
             "email": user_info.get("mail") or user_info.get('userPrincipalName'),
             "klasse": 1,
@@ -131,7 +144,7 @@ def microsoft_callback(request):
     if not created:
         StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
 
-            profile_picture = profile_picture,          # Anderen Paramater werden sich nie ändern
+            profile_picture = base64_encoded,          # Anderen Paramater werden sich nie ändern
             teams = teams_info.get('value', []),
             klasse = 1,
             stufe = 1,
@@ -143,7 +156,6 @@ def microsoft_callback(request):
     debug(["Student Profile Created:", created])
     debug(["Teams Response:", teams_info])
     debug(["Group Memberships Response:", group_memberships_info])
-    debug(["Session Data:", request.session.get('user')])
 
 
 

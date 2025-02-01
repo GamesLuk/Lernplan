@@ -9,3 +9,4 @@ Backend/system/migrations/__pycache__/0016_rename_person_lernzeitprofile_teacher
 Backend/system/__pycache__/models.cpython-312.pyc
 *.pyc
 *.pyc
+/Backend/main/__pycache__

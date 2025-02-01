@@ -22,7 +22,7 @@ def debug(message):
     for text in message:
         print(text)
 
-def setKlasse(school_IDx):
+def setKlasse_Role(school_IDx):
     month = datetime.now().month
 
     if month >= 8:
@@ -32,9 +32,20 @@ def setKlasse(school_IDx):
 
     name = year + " Klasse "
 
-    teams = StudentProfile.objects.filter(school_ID=school_IDx).values("teams").first()["teams"]
+    teams = getStudent("school_ID", school_IDx, "teams")
+
+    role = 0
+
+    StudentProfile.objects.filter(school_ID=school_IDx).update(role=role)
 
     for team in teams:
+        if team["displayName"].startswith("Kollegium"):
+            role = 2
+            StudentProfile.objects.filter(school_ID=school_IDx).update(role=role)
+
+        if role != 0:
+            return
+
         if team["displayName"].startswith(name):
             stufe = team["displayName"].split("e ", 1)[1][:2]
             klasse = team["displayName"].split(stufe, 1)[1][:1]
@@ -43,3 +54,10 @@ def setKlasse(school_IDx):
             StudentProfile.objects.filter(school_ID=school_IDx).update(klasse=klasse)
 
     # All - alle die nicht -> name - preset -> Klasse
+
+
+def getStudent(filter, parameter, value):
+    if filter == "school_ID":
+        return StudentProfile.objects.filter(school_ID=parameter).values(value).first()[value]
+    elif filter == "email":
+        return StudentProfile.objects.filter(email=parameter).values(value).first()[value]

@@ -24,6 +24,7 @@ def home(request):
 
     @login_required
     def home(request):
+        set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         return render(request, "basic/home.html")
     
     return home(request)

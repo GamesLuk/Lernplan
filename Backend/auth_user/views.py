@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
 from system.models import StudentProfile
-from utils.system import debug, getSchool_ID, setKlasse
+from utils.system import debug, getSchool_ID, setKlasse_Role
 import base64
 from django.db.models.functions import Cast
 from decorators.permissions import login_required, role_required
@@ -127,7 +127,7 @@ def microsoft_callback(request):
 
         )
 
-    setKlasse(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
+    setKlasse_Role(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
 
     # Speicherung der Daten in der Session
     request.session['user'] = {
@@ -184,6 +184,7 @@ def fake_login(request):
 
     @login_required
     def fake_login(request):
+        set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         vars = {
             "fakes": get_Fakes(),
             "request": request,

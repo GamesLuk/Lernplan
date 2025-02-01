@@ -39,7 +39,7 @@ def microsoft_callback(request):
     token_response = requests.post(settings.MICROSOFT_TOKEN_URL, data=token_data)
     token_response_data = token_response.json()
 
-    debug(["Token Response:", token_response_data])
+    #debug(["Token Response:", token_response_data])
 
 
 
@@ -51,7 +51,7 @@ def microsoft_callback(request):
     user_info_response = requests.get(settings.MICROSOFT_USER_INFO_URL, headers=headers)
     user_info = user_info_response.json()
 
-    debug(["User Info Response:", user_info_response.status_code, user_info_response.json()])
+    #debug(["User Info Response:", user_info_response.status_code, user_info_response.json()])
 
 
     # Benutzer-Teams abfragen
@@ -79,10 +79,7 @@ def microsoft_callback(request):
     organisation_info = organisation_response.json()
 
 
-    debug(["User Info:", user_info])
-
-
-    # Encoden der Bilddatei
+    #debug(["User Info:", user_info])
 
     # Angenommen, 'image_bytes' ist die bytes-Daten, die du speichern möchtest
     base64_encoded = base64.b64encode(profile_picture).decode('utf-8')
@@ -116,7 +113,7 @@ def microsoft_callback(request):
     }
 
     # Ausgabe der Email bei DEBUG
-    debug([request.session.get("user").get("email")])
+    #debug([request.session.get("user").get("email")])
 
 
     # Speicherung der Daten in der Datenbank
@@ -153,9 +150,11 @@ def microsoft_callback(request):
         )
 
     # DEBUG zur Kontrolle der Antworten von Microsoft
-    debug(["Student Profile Created:", created])
-    debug(["Teams Response:", teams_info])
-    debug(["Group Memberships Response:", group_memberships_info])
+    #debug(["Student Profile Created:", created])
+    #debug(["Teams Response:", teams_info])
+    #debug(["Group Memberships Response:", group_memberships_info])
+
+
 
 
 

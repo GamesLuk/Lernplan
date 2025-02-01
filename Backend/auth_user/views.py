@@ -1,11 +1,14 @@
+from django.forms import CharField
 import requests
 from django.conf import settings
 from django.shortcuts import redirect, render
 from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
 from system.models import StudentProfile
-from utils.system import debug, getSchool_ID
+from utils.system import debug, getSchool_ID, setKlasse
 import base64
+from django.db.models.functions import Cast
+from decorators.permissions import login_required, role_required
 
 
 def microsoft_login(request):
@@ -65,7 +68,8 @@ def microsoft_callback(request):
 
 
     # Benutzer- und Organisationsinformationen abfragen
-    tenant_id = user_info.get('id')  # ID des Benutzers
+    teams = teams_info.get("value", [])
+    tenant_id = teams[0]["tenantId"] if teams else None
     organisation_response = requests.get(f"https://graph.microsoft.com/v1.0/users/{tenant_id}/memberOf", headers=headers)
     organisation_info = organisation_response.json()
 
@@ -77,13 +81,12 @@ def microsoft_callback(request):
 
     #--------------------------------------------------- Speicherung -----------------------------------------------------------------#
 
-    allowed_organisations = settings.SCHUL_IDS
-
     
     # Wenn die User auf Schule geprüft werden und nicht dazugehören, wird der User redirectet und der Login-Vorgang abgebrochen
-    if settings.CHECK_SCHUL_IDS == True and not any(org['id'] in allowed_organisations for org in organisation_info.get('value', [])):
+    if settings.CHECK_SCHUL_IDS == True and not tenant_id == settings.SCHUL_IDS:
         return redirect("main:welcome")
     
+    school_ID = 0
 
     if not StudentProfile.objects.filter(email=user_info.get("mail")):
         school_ID = getSchool_ID()

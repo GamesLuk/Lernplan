@@ -181,3 +181,24 @@ def microsoft_callback(request):
 def logout(request):
     request.session.flush()  # Löscht alle Sitzungsdaten
     return redirect('main:welcome')
+
+
+
+
+def fake_login(request):
+
+    set_Session_Value(request, settings.REQUESTED_URL_NAME, "auth:fake_login")
+
+    @login_required
+    def fake_login(request):
+        vars = {
+            "fakes": get_Fakes(),
+            "request": request,
+        }
+        return render(request, "basic/fake_login.html", vars)
+    
+    return fake_login(request)
+
+
+def get_Fakes():
+    return list(StudentProfile.objects.filter(school_ID__startswith="9").values_list("school_ID", flat=True))

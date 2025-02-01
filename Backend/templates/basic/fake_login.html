@@ -1,0 +1,8 @@
+<h1>Fake - Logins</h1>
+<hr>
+<ul>
+{% for login in fakes %}
+{% load login_fake from filter %}
+<li><a href="{% login_fake login request %}">{{login}}</a></li>
+{% endfor %}
+</ul>

@@ -6,7 +6,7 @@ from urllib.parse import urlencode
 from utils.session import set_Session_Value, get_Session_Value
 from system.models import StudentProfile
 from utils.system import debug, getSchool_ID, setKlasse_Role
-import base64
+from django.http import HttpResponse
 from django.db.models.functions import Cast
 from decorators.permissions import login_required, role_required
 
@@ -181,7 +181,7 @@ def logout(request):
 def fake_login(request):
 
     set_Session_Value(request, settings.REQUESTED_URL_NAME, "auth:fake_login")
-
+    
     @login_required
     def fake_login(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
@@ -196,3 +196,4 @@ def fake_login(request):
 
 def get_Fakes():
     return list(StudentProfile.objects.filter(school_ID__startswith="9").values_list("school_ID", flat=True))
+

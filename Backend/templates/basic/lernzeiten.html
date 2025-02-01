@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernzeiten</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Heller Hintergrund passend zu den aktuellen Farben */
+        }
+
+        .header {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .filter-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #bbb;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background-color: #f9f9f9;
+            color: #333;
+            flex: 1;
+            min-width: 150px;
+            border-right: 1px solid #ddd;
+        }
+
+        .filter-container select:last-child {
+            border-right: none;
+        }
+
+        .filter-container select:focus {
+            outline: none;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1400px;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            width: 16.66%; /* Gleichmäßige Verteilung der Spaltenbreite */
+        }
+
+        th {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:nth-of-type(even) {
+            background-color:hsla(168, 100.00%, 29.80%, 0.10);
+        }
+
+        tr:hover {
+            background-color: hsla(168, 100.00%, 29.80%, 0.30);
+        }
+
+        a {
+            text-decoration: none;
+            color: #009879;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .header a {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
+                border: none;
+                border-color: transparent;
+            }
+
+            .filter-container select {
+                font-size: 14px;
+                padding: 8px;
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .filter-container select:last-child {
+                border-bottom: none;
+            }
+
+            table {
+                font-size: 14px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/lernzeiten">Lernzeiten</a>
+        <a href="/about">Über uns</a>
+        <a href="/contact">Kontakt</a>
+    </div>
+    
+    <div class="container">
+        <h1>Lernzeiten</h1>
+        
+        <div class="filter-container">
+            <select id="fachFilter" onchange="filterTable()">
+                <option value="">Alle Fächer</option>
+                {% for lernzeit in lernzeiten %}
+                    <option value="{{ lernzeit.fach }}">{{ lernzeit.fach }}</option>
+                {% endfor %}
+            </select>
+            <select id="datumFilter" onchange="filterTable()">
+                <option value="">Alle Daten</option>
+                {% for lernzeit in lernzeiten %}
+                    <option value="{{ lernzeit.datum }}">{{ lernzeit.datum }}</option>
+                {% endfor %}
+            </select>
+            <select id="stundeFilter" onchange="filterTable()">
+                <option value="">Alle Stunden</option>
+                {% for lernzeit in lernzeiten %}
+                    <option value="{{ lernzeit.stunde }}">{{ lernzeit.stunde }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <table id="lernzeitenTable">
+            <tr>
+                <th>Name</th>
+                <th>Fach</th>
+                <th>Lehrer</th>
+                <th>Datum</th>
+                <th>Raum</th>
+                <th>Stunde</th>
+            </tr>
+            
+            {% for lernzeit in lernzeiten %}
+            <tr onclick="location.href='{{ lernzeit.link }}'" style="cursor: pointer;">
+                <td>{{ lernzeit.name }}</td>
+                <td>{{ lernzeit.fach }}</td>
+                <td>{{ lernzeit.lehrer }}</td>
+                <td>{{ lernzeit.datum }}</td>
+                <td>{{ lernzeit.raum }}</td>
+                <td>{{ lernzeit.stunde }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <script>
+        function filterTable() {
+            var fachFilter, datumFilter, stundeFilter, table, tr, td, i, txtValue;
+            fachFilter = document.getElementById("fachFilter").value.toUpperCase();
+            datumFilter = document.getElementById("datumFilter").value.toUpperCase();
+            stundeFilter = document.getElementById("stundeFilter").value.toUpperCase();
+            table = document.getElementById("lernzeitenTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                if (td) {
+                    var fach = td[1].textContent || td[1].innerText;
+                    var datum = td[3].textContent || td[3].innerText;
+                    var stunde = td[5].textContent || td[5].innerText;
+                    if ((fach.toUpperCase().indexOf(fachFilter) > -1 || !fachFilter) &&
+                        (datum.toUpperCase().indexOf(datumFilter) > -1 || !datumFilter) &&
+                        (stunde.toUpperCase().indexOf(stundeFilter) > -1 || !stundeFilter)) {
+                        tr[i].style.display = "";
+                    }
+                }
+            }
+        }
+
+        // Set the current date as "Heute"
+        document.addEventListener("DOMContentLoaded", function() {
+            var today = new Date().toISOString().split('T')[0];
+            var options = document.querySelectorAll('#datumFilter option');
+            options.forEach(function(option) {
+                if (option.value === today) {
+                    option.textContent = "Heute";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

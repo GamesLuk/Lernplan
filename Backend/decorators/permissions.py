@@ -23,3 +23,14 @@ def role_required(role):
             return view_func(request, *args, **kwargs)
         return wrapper
     return decorator
+
+from django.http import HttpResponseForbidden
+
+def only_localhost(function):
+    def wrap(request, *args, **kwargs):
+        # Überprüfen, ob der Hostname mit 'localhost' oder '127.0.0.1' beginnt
+        host = request.get_host().split(':')[0]  # Der Hostname ohne Port
+        if not (host.startswith('localhost') or host.startswith('127.0.0.1')):
+            return HttpResponseForbidden("Diese Funktion ist nur von localhost zugänglich.")
+        return function(request, *args, **kwargs)
+    return wrap

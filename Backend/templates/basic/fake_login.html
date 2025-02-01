@@ -1,8 +1,23 @@
-<h1>Fake - Logins</h1>
-<hr>
-<ul>
-{% for login in fakes %}
-{% load login_fake from filter %}
-<li><a href="{% login_fake login request %}">{{login}}</a></li>
-{% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>    
+<body>    
+    <h1>Fake - Logins - 1</h1>
+    <hr>
+    <ul>
+    {% for login in fakes %}
+    <li><a onclick="login_fake({{login}})" href="#">{{login}}</a></li>
+    {% endfor %}
+    </ul>
+
+    <script>
+        function login_fake(login) {
+             
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch(`https://mzb-lev.de/run/login_fake/?login=${encodeURIComponent(login)}&token=fkji4hht4iifgndfkg`, { method: 'POST' , headers: {'Content-Type': 'application/json','X-CSRFToken': csrfToken  }})
+        }
+    </script>
+</body>
+</html>

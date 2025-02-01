@@ -171,6 +171,6 @@ SCOPES = [                      # Für Microsoft-Login (Berechtigungen)
 
 REQUESTED_URL_NAME = "requested_url_dfg"
 
-SCHUL_IDS = []
+SCHUL_IDS = "8bf5190c-b458-41c9-9cc2-631ff5956148"
 
-CHECK_SCHUL_IDS = False     # Default: TRUE | Test: FALSE
+CHECK_SCHUL_IDS = True     # Default: TRUE | Test: FALSE

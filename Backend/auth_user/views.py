@@ -64,15 +64,6 @@ def microsoft_callback(request):
     group_memberships_info = group_memberships_response.json()
 
 
-     # Benutzerprofilbild abfragen
-    profile_picture_response = requests.get(f"https://graph.microsoft.com/v1.0/me/photo/$value", headers=headers)
-    # Benutzerprofilbild prüfen
-    if profile_picture_response.status_code == 200:
-        profile_picture = profile_picture_response.content
-    else:
-        profile_picture = None  # Wenn kein Profilbild vorhanden ist, auf None setzen
-
-
     # Benutzer- und Organisationsinformationen abfragen
     tenant_id = user_info.get('id')  # ID des Benutzers
     organisation_response = requests.get(f"https://graph.microsoft.com/v1.0/users/{tenant_id}/memberOf", headers=headers)
@@ -81,8 +72,6 @@ def microsoft_callback(request):
 
     #debug(["User Info:", user_info])
 
-    # Angenommen, 'image_bytes' ist die bytes-Daten, die du speichern möchtest
-    base64_encoded = base64.b64encode(profile_picture).decode('utf-8')
 
 
 
@@ -127,7 +116,6 @@ def microsoft_callback(request):
             'name': user_info.get('displayName'),
             "first_name":user_info.get("givenName"),
             "last_name": user_info.get("surname"),
-            'profile_picture': base64_encoded,
             'teams': teams_info.get('value', []),
             "email": user_info.get("mail") or user_info.get('userPrincipalName'),
             "klasse": 1,
@@ -141,7 +129,6 @@ def microsoft_callback(request):
     if not created:
         StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
 
-            profile_picture = base64_encoded,          # Anderen Paramater werden sich nie ändern
             teams = teams_info.get('value', []),
             klasse = 1,
             stufe = 1,

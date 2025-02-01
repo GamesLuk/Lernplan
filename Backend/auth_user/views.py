@@ -85,21 +85,9 @@ def microsoft_callback(request):
         return redirect("main:welcome")
     
 
-    school_ID = getSchool_ID()
-    # Speicherung der Daten in der Session
-    request.session['user'] = {
-        "school_ID": school_ID,                                                         # 10000, 10001, ...
-        'name': user_info.get('displayName'),                                   # Voller Name
-        "first_name":user_info.get("givenName"),
-        "last_name": user_info.get("surname"),
-        'profile_picture': base64_encoded,                                     # Profilbild
-        'teams': teams_info.get('value', []),                                   # Teams des Benutzers
-        'email': user_info.get('mail') or user_info.get('userPrincipalName'),   # Email
-        "klasse": 1,                                                            # a,b,c,d,e, ...
-        "stufe": 1,                                                             # 5,6,7,8,9, ...
-        'role': 1,                                                              # Schüler, Lehrer, Admin, ...
-
-    }
+    if not StudentProfile.objects.filter(email=user_info.get("mail")):
+        school_ID = getSchool_ID()
+    
 
     # Ausgabe der Email bei DEBUG
     #debug([request.session.get("user").get("email")])
@@ -118,8 +106,8 @@ def microsoft_callback(request):
             "last_name": user_info.get("surname"),
             'teams': teams_info.get('value', []),
             "email": user_info.get("mail") or user_info.get('userPrincipalName'),
-            "klasse": 1,
-            "stufe": 1,
+            "klasse": 0,
+            "stufe": 0,
             "role": 1,
 
         }
@@ -130,11 +118,27 @@ def microsoft_callback(request):
         StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
 
             teams = teams_info.get('value', []),
-            klasse = 1,
-            stufe = 1,
+            klasse = 0,
+            stufe = 0,
             role = 1,
 
         )
+
+    setKlasse(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
+
+    # Speicherung der Daten in der Session
+    request.session['user'] = {
+        "school_ID": StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first(),                                                 # 10000, 10001, ...
+        'name': user_info.get('displayName'),                                   # Voller Name
+        "first_name":user_info.get("givenName"),
+        "last_name": user_info.get("surname"),                                  
+        'teams': teams_info.get('value', []),                                   # Teams des Benutzers
+        'email': user_info.get('mail') or user_info.get('userPrincipalName'),   # Email
+        "klasse": StudentProfile.objects.filter(email=user_info.get("mail")).values("klasse").first(),                                                            # a,b,c,d,e, ...
+        "stufe": StudentProfile.objects.filter(email=user_info.get("mail")).values("stufe").first(),                                                             # 5,6,7,8,9, ...
+        'role': StudentProfile.objects.filter(email=user_info.get("mail")).values("role").first(),                                                              # Schüler, Lehrer, Admin, ...
+
+    }
 
     # DEBUG zur Kontrolle der Antworten von Microsoft
     #debug(["Student Profile Created:", created])

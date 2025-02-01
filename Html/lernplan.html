@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="de">
 <head>
@@ -8,10 +9,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="obere-ecke"><div class="button3"><a href="/seiteschließen.html">X</a></div></div>
+    <div class="glass" style="z-index: -4; backdrop-filter: blur(3px); position: fixed; height: 100px; width:100%; top: 5%;"></div>
+    <div class="obere-ecke"><div class="button3"><a href="seiteschließen.html">X</a></div></div>
     <div class="container">
         <div class="links">
-            <!--DATE-->20.01.2025<!--/DATE-->
+            
         </div>
         <div class="zentriert">
             <h1>LernPlan</h1>
@@ -21,10 +23,17 @@
         </div>
     </div>
     <br><br><br><br>
-    <p class="starttext">Als welche Anwendungsperson möchtest du <em>LernPlan</em> nutzen?</p>
-    <br><br>
-    <p class="zentriert"><a href="/schueleranmeldung.html" class="button1">Schüler</a></p>
-    <br><br>
-    <p class="zentriert"><a href="/lehreranmeldung.html" class="button2">Lehrer</a></p>
+    <div class="kreis" style="z-index: -5;"></div>
+    <div class="polygon" style="z-index: -5;"></div>
+    <div class="glass" style="z-index: -4;"></div>
+    
+        <br><br>
+        <p class="starttext">Möchtest du dich <br> für <em>LernPlan</em> anmelden?</p>
+        <br>
+        <p class="zentriert"><a href="anmeldung.html" class="button1">Weiter</a></p>
+        <br>
+        
+    
 </body>
 </html>
+

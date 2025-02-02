@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import admin
 from django.http import HttpResponse
 from decorators.permissions import login_required, role_required
-from utils.session import set_Session_Value, get_Session_Value
+from utils.session import set_Session_Value, get_Session_Value, get_User_Value
 from django.conf import settings
-from utils.system import getSchool_ID
+from utils.system import getSchool_ID, getDay
+from system.models import LernzeitProfile
 
 
 # Create your views here.
@@ -37,56 +38,19 @@ def lernzeiten(request):
     def lernzeiten(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
 
+        klasse = str(get_User_Value(request, "stufe")) + get_User_Value(request, "klasse")
+        stufe = get_User_Value(request, "stufe")
+
+
+        if not stufe >= 11:
+            lernzeiten = LernzeitProfile.objects.filter(stufen__contains=stufe).all()
+        
+
         vars = {
-            "lernzeiten": [
-                {
-                    "name": "Mathe",
-                    "fach": "Mathe",
-                    "datum": "2021-08-24",
-                    "lehrer": "Herr Müller",
-                    "stunde": "3",
-                    "raum": "A-123",
-                    "link": "https://www.google.com",
-                },
-                {
-                    "name": "Englisch",
-                    "fach": "Englisch",
-                    "datum": "2021-08-25",
-                    "lehrer": "Frau Schmidt",
-                    "stunde": "2",
-                    "raum": "B-234",
-                    "link": "https://www.bing.com",
-                },
-                {
-                    "name": "Biologie",
-                    "fach": "Biologie",
-                    "datum": "2021-08-26",
-                    "lehrer": "Herr Fischer",
-                    "stunde": "4",
-                    "raum": "C-345",
-                    "link": "https://www.yahoo.com",
-                },
-                {
-                    "name": "Chemie",
-                    "fach": "Chemie",
-                    "datum": "2021-08-27",
-                    "lehrer": "Frau Weber",
-                    "stunde": "1",
-                    "raum": "D-456",
-                    "link": "https://www.duckduckgo.com",
-                },
-                {
-                    "name": "Physik",
-                    "fach": "Physik",
-                    "datum": "2021-08-28",
-                    "lehrer": "Herr Becker",
-                    "stunde": "5",
-                    "raum": "E-567",
-                    "link": "https://www.ask.com",
-                },
-            ],
+            "klasse":klasse,
+            "lernzeiten":lernzeiten
         }
 
-        return render(request, "basic/lernzeiten.html", vars)
+        return render(request, "main/lernzeiten.html", vars)
     
     return lernzeiten(request)

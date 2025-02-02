@@ -76,3 +76,6 @@ def getStudent(filter, parameter, value):
         return StudentProfile.objects.filter(school_ID=parameter).values(value).first()[value]
     elif filter == "email":
         return StudentProfile.objects.filter(email=parameter).values(value).first()[value]
+    
+def getDay():
+    return datetime.now().day

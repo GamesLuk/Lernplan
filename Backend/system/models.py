@@ -29,7 +29,7 @@ class LernzeitProfile(models.Model):
     type = models.IntegerField(db_index=True)
     klasse = models.CharField(max_length=10, db_index=True, null=True)
     stufen = models.JSONField(db_index=True)
-    tag = models.JSONField(db_index=True)
+    tag = models.CharField(max_length=20, db_index=True)
     stunde = models.JSONField(db_index=True)
     teacher = models.CharField(max_length=20, db_index=True)
     raum = models.CharField(max_length=10, db_index=True)

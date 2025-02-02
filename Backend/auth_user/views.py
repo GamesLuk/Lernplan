@@ -123,8 +123,12 @@ def microsoft_callback(request):
             teams = teams_info.get('value', []),
 
         )
+        if settings.DEBUG:
+            setKlasse_Role(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
+    else:
+        setKlasse_Role(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
 
-    setKlasse_Role(StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"])
+
 
     # Speicherung der Daten in der Session
     request.session['user'] = {

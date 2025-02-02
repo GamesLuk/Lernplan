@@ -40,6 +40,13 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            overflow: auto; /* Enable scrolling */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
         }
 
         h1 {
@@ -47,8 +54,24 @@
             margin-top: 20px;
         }
 
+        .search-container {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            flex: 1;
+            min-width: 150px;
+        }
+
         .filter-container {
-            margin: 20px 0;
             display: flex;
             justify-content: center;
             width: 100%;
@@ -149,6 +172,10 @@
                 font-size: 24px;
             }
 
+            .search-container {
+                justify-content: center;
+            }
+
             .filter-container {
                 flex-direction: column;
                 align-items: center;
@@ -195,7 +222,11 @@
     </div>
     
     <div class="container">
-        <h1>Lernzeiten</h1>
+        <h1>Lernzeiten {{klasse}}</h1>
+        
+        <div class="search-container">
+            <input type="text" id="nameSearch" onkeyup="filterTable()" placeholder="Suche nach Name...">
+        </div>
         
         <div class="filter-container">
             <select id="fachFilter" onchange="filterTable()">
@@ -205,9 +236,9 @@
                 {% endfor %}
             </select>
             <select id="datumFilter" onchange="filterTable()">
-                <option value="">Alle Daten</option>
+                <option value="">Alle Wochentage</option>
                 {% for lernzeit in lernzeiten %}
-                    <option value="{{ lernzeit.datum }}">{{ lernzeit.datum }}</option>
+                    <option value="{{ lernzeit.tag }}">{{ lernzeit.tag }}</option>
                 {% endfor %}
             </select>
             <select id="stundeFilter" onchange="filterTable()">
@@ -221,20 +252,18 @@
         <table id="lernzeitenTable">
             <tr>
                 <th>Name</th>
-                <th>Fach</th>
                 <th>Lehrer</th>
-                <th>Datum</th>
                 <th>Raum</th>
+                <th>Tag</th>
                 <th>Stunde</th>
             </tr>
             
             {% for lernzeit in lernzeiten %}
             <tr onclick="location.href='{{ lernzeit.link }}'" style="cursor: pointer;">
                 <td>{{ lernzeit.name }}</td>
-                <td>{{ lernzeit.fach }}</td>
-                <td>{{ lernzeit.lehrer }}</td>
-                <td>{{ lernzeit.datum }}</td>
+                <td>{{ lernzeit.teacher }}</td>
                 <td>{{ lernzeit.raum }}</td>
+                <td>{{ lernzeit.tag }}</td>
                 <td>{{ lernzeit.stunde }}</td>
             </tr>
             {% endfor %}
@@ -243,23 +272,31 @@
 
     <script>
         function filterTable() {
-            var fachFilter, datumFilter, stundeFilter, table, tr, td, i, txtValue;
+            var nameSearch, fachFilter, datumFilter, stundeFilter, table, tr, td, i, txtValue;
+            nameSearch = document.getElementById("nameSearch").value.toUpperCase();
             fachFilter = document.getElementById("fachFilter").value.toUpperCase();
             datumFilter = document.getElementById("datumFilter").value.toUpperCase();
             stundeFilter = document.getElementById("stundeFilter").value.toUpperCase();
             table = document.getElementById("lernzeitenTable");
             tr = table.getElementsByTagName("tr");
+            var visibleRowCount = 0;
             for (i = 1; i < tr.length; i++) {
                 tr[i].style.display = "none";
                 td = tr[i].getElementsByTagName("td");
                 if (td) {
+                    var name = td[0].textContent || td[0].innerText;
                     var fach = td[1].textContent || td[1].innerText;
-                    var datum = td[3].textContent || td[3].innerText;
-                    var stunde = td[5].textContent || td[5].innerText;
-                    if ((fach.toUpperCase().indexOf(fachFilter) > -1 || !fachFilter) &&
-                        (datum.toUpperCase().indexOf(datumFilter) > -1 || !datumFilter) &&
+                    var raum = td[2].textContent || td[2].innerText;
+                    var tag = td[3].textContent || td[3].innerText;
+                    var stunde = td[4].textContent || td[4].innerText;
+                    if ((name.toUpperCase().indexOf(nameSearch) > -1 || !nameSearch) &&
+                        (fach.toUpperCase().indexOf(fachFilter) > -1 || !fachFilter) &&
+                        (tag.toUpperCase().indexOf(datumFilter) > -1 || !datumFilter) &&
                         (stunde.toUpperCase().indexOf(stundeFilter) > -1 || !stundeFilter)) {
                         tr[i].style.display = "";
+                        tr[i].style.backgroundColor = (visibleRowCount % 2 === 0) ? "hsla(168, 100.00%, 29.80%, 0.10)" : "#e0f7fa";
+                        tr[i].classList.add('hover-effect');
+                        visibleRowCount++;
                     }
                 }
             }
@@ -274,7 +311,31 @@
                     option.textContent = "Heute";
                 }
             });
+
+            // Remove duplicate options
+            removeDuplicateOptions('fachFilter');
+            removeDuplicateOptions('datumFilter');
+            removeDuplicateOptions('stundeFilter');
         });
+
+        function removeDuplicateOptions(selectId) {
+            var select = document.getElementById(selectId);
+            var seen = {};
+            for (var i = 0; i < select.options.length; i++) {
+                var option = select.options[i];
+                if (seen[option.value]) {
+                    select.remove(i);
+                    i--;
+                } else {
+                    seen[option.value] = true;
+                }
+            }
+        }
     </script>
+    <style>
+        .hover-effect:hover {
+            background-color: hsla(168, 100.00%, 29.80%, 0.30) !important;
+        }
+    </style>
 </body>
 </html>

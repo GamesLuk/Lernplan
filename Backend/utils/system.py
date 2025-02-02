@@ -18,6 +18,21 @@ def getSchool_ID():
     )
     return school_ID
 
+def getLernzeit_ID():
+    id = system.objects.filter(name="lernzeit_ID").values("value").first()
+
+    if not id:
+        id = system.objects.create(
+            name="lernzeit_ID",
+            value="1"
+        )
+    
+    lernzeit_ID = id["value"]
+    system.objects.update(
+        value=int(lernzeit_ID) + 1
+    )
+    return lernzeit_ID
+
 def debug(message):
     for text in message:
         print(text)

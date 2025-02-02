@@ -1,8 +1,10 @@
 from decorators.permissions import only_localhost
 from system.models import StudentProfile
-from utils.system import setKlasse_Role
+from utils.system import setKlasse_Role, getLernzeit_ID
 from utils.session import set_Session_Value
 from django.http import HttpResponse
+import json
+from system.models import LernzeitProfile
 
 def run_login(request):
 
@@ -35,4 +37,30 @@ def run_login(request):
     
     login_fake(login, request)
 
+    return HttpResponse(status=204)  # Leere Antwort ohne Inhalt
+
+def datensatz(request):
+    
+    with open('C:\\Users\\lukas\\Documents\\Programming_Programs\\Lernplan\\Zusatz\\lernzeiten.json', 'r') as file:
+        data = json.load(file)
+        for item in data:
+            LernzeitProfile.objects.create(
+                name=item['name'],
+                fach=item['fach'],
+                stufen=item['stufen'],
+                teacher=item['lehrer'],
+                raum=item['raum'],
+                tag=item['tag'],
+                stunde=item['stunde'],
+                type=item['type'],
+                plätze=item['platze'],
+                lernzeit_ID=getLernzeit_ID(),
+                klasse=" ",
+                beschreibung=" ",
+                activ=True,
+            )
+
+    return HttpResponse("Datensatz erfolgreich erstellt", status=200)
+
+def none(request):
     return HttpResponse(status=204)  # Leere Antwort ohne Inhalt

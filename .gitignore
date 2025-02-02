@@ -10,3 +10,4 @@ Backend/system/__pycache__/models.cpython-312.pyc
 *.pyc
 *.pyc
 /Backend/main/__pycache__
+*.pyc

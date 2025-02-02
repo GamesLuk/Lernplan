@@ -23,15 +23,15 @@ class StudentProfile(models.Model):
         return self.name
     
 class LernzeitProfile(models.Model):
-    lernzeit_ID = models.IntegerField(db_index=True, unique=True)
-    fach = models.CharField(max_length=100,db_index=True)
-    name = models.CharField(max_length=100,db_index=True)
-    art = models.IntegerField(db_index=True)
+    lernzeit_ID = models.IntegerField(db_index=True)
+    fach = models.CharField(max_length=50,db_index=True)
+    name = models.CharField(max_length=50,db_index=True)
+    type = models.IntegerField(db_index=True)
     klasse = models.CharField(max_length=10, db_index=True, null=True)
     stufen = models.JSONField(db_index=True)
     tag = models.JSONField(db_index=True)
     stunde = models.JSONField(db_index=True)
-    teacher_school_ID = models.CharField(max_length=100, db_index=True)
+    teacher = models.CharField(max_length=20, db_index=True)
     raum = models.CharField(max_length=10, db_index=True)
     plätze = models.IntegerField(db_index=True)
     beschreibung = models.TextField()

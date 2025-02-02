@@ -8,7 +8,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -19,7 +19,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -30,7 +30,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ-Aufg",
@@ -41,7 +41,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -52,7 +52,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -63,7 +63,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -74,7 +74,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -85,7 +85,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -96,7 +96,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -107,7 +107,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Bibliothek",
@@ -118,7 +118,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -129,7 +129,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -140,7 +140,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -151,7 +151,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -162,7 +162,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -173,7 +173,7 @@
         "tag": 3,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -184,7 +184,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -195,7 +195,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -206,7 +206,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -217,7 +217,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ-Aufg",
@@ -228,7 +228,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -239,7 +239,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -250,7 +250,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -261,7 +261,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -272,7 +272,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ-Aufg (B)",
@@ -283,7 +283,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ-Aufg (A)",
@@ -294,7 +294,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Freiarbeit E",
@@ -305,7 +305,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -316,7 +316,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -327,7 +327,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -338,7 +338,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -349,7 +349,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ? M",
@@ -360,7 +360,7 @@
         "tag": 3,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -371,7 +371,7 @@
         "tag": 3,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -382,7 +382,7 @@
         "tag": 3,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -393,7 +393,7 @@
         "tag": 3,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -404,7 +404,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "DaZ",
@@ -415,7 +415,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ? E",
@@ -426,7 +426,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Silentium",
@@ -437,7 +437,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "LZ digital",
@@ -448,7 +448,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ digital",
@@ -459,7 +459,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ-GA",
@@ -470,7 +470,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ-GA",
@@ -481,7 +481,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ m Musik",
@@ -492,7 +492,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ m Musik",
@@ -503,7 +503,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Ballsp./Fitness",
@@ -514,7 +514,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Malen/Entspannen",
@@ -525,7 +525,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ Entspannung",
@@ -536,7 +536,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ-GA",
@@ -547,7 +547,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ-GA",
@@ -558,7 +558,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ-GA",
@@ -569,7 +569,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ m Musik",
@@ -580,7 +580,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ m Musik",
@@ -591,7 +591,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ digital",
@@ -602,7 +602,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ digital",
@@ -613,7 +613,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Kicker",
@@ -624,7 +624,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Uni-Hockey",
@@ -635,7 +635,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Gesellschaftsspiele",
@@ -646,7 +646,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Lego",
@@ -657,7 +657,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "Fußball",
@@ -668,7 +668,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "LZ Enspannung",
@@ -679,7 +679,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     },
     {
         "name": "WS: D-Gr/Re",
@@ -690,7 +690,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -701,7 +701,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -712,7 +712,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -723,7 +723,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -734,7 +734,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -745,7 +745,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -756,7 +756,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -767,7 +767,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -778,7 +778,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "WS: Gleich.",
@@ -789,7 +789,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "WS: MatheAsse",
@@ -800,7 +800,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -811,7 +811,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -822,7 +822,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-Lesen",
@@ -833,7 +833,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-PA",
@@ -844,7 +844,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-PA",
@@ -855,7 +855,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Lerncoaching",
@@ -866,7 +866,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "DaZ",
@@ -877,7 +877,7 @@
         "tag": 1,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -888,7 +888,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -899,7 +899,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -910,7 +910,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -921,7 +921,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -932,7 +932,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -943,7 +943,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -954,7 +954,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -965,7 +965,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -976,7 +976,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -987,7 +987,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ digital",
@@ -998,7 +998,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-GA",
@@ -1009,7 +1009,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "DaZ",
@@ -1020,7 +1020,7 @@
         "tag": 1,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -1031,7 +1031,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1042,7 +1042,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1053,7 +1053,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "WS:Schreiben",
@@ -1064,7 +1064,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1075,7 +1075,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1086,7 +1086,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "WS: E-Gr",
@@ -1097,7 +1097,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1108,7 +1108,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1119,7 +1119,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1130,7 +1130,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1141,7 +1141,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1152,7 +1152,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1163,7 +1163,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -1174,7 +1174,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -1185,7 +1185,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-Lesen",
@@ -1196,7 +1196,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-PA",
@@ -1207,7 +1207,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-PA",
@@ -1218,7 +1218,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Malen/Entspannen",
@@ -1229,7 +1229,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "DaZ",
@@ -1240,7 +1240,7 @@
         "tag": 4,
         "stunde": 8,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "FLB",
@@ -1251,7 +1251,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1262,7 +1262,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1273,7 +1273,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1284,7 +1284,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1295,7 +1295,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1306,7 +1306,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1317,7 +1317,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1328,7 +1328,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1339,7 +1339,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "FLB",
@@ -1350,7 +1350,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "Silentium",
@@ -1361,7 +1361,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ digital",
@@ -1372,7 +1372,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-GA",
@@ -1383,7 +1383,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "LZ-PA",
@@ -1394,7 +1394,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 0,
-        "plätze": 30
+        "platze": 30
     },
     {
         "name": "DaZ",
@@ -1405,7 +1405,7 @@
         "tag": 4,
         "stunde": 9,
         "type": 2,
-        "plätze": 0
+        "platze": 0
     },
     {
         "name": "Fußball",
@@ -1416,6 +1416,6 @@
         "tag": 4,
         "stunde": 9,
         "type": 1,
-        "plätze": 20
+        "platze": 20
     }
 ]

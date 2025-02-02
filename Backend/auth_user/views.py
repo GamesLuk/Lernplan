@@ -121,9 +121,6 @@ def microsoft_callback(request):
         StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
 
             teams = teams_info.get('value', []),
-            klasse = 0,
-            stufe = 0,
-            role = 1,
 
         )
 

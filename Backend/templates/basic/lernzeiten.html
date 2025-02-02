@@ -62,16 +62,24 @@
         .filter-container select {
             padding: 10px;
             font-size: 16px;
-            border: none;
+            border: solid 1px;
+            border-color: #fff;
+            border: 1px solid #ddd;
             background-color: #f9f9f9;
             color: #333;
             flex: 1;
             min-width: 150px;
-            border-right: 1px solid #ddd;
         }
 
         .filter-container select:last-child {
-            border-right: none;
+
+            border-bottom-right-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .filter-container select:first-child {
+            border-bottom-left-radius: 25px;
+            border-top-left-radius: 25px;
         }
 
         .filter-container select:focus {
@@ -145,7 +153,11 @@
                 flex-direction: column;
                 align-items: center;
                 border: none;
-                border-color: transparent;
+                border-radius: 0;
+                padding: 10px;
+                display: flex;
+                overflow: hidden;
+                box-shadow: none;
             }
 
             .filter-container select {
@@ -154,12 +166,12 @@
                 width: 100%;
                 max-width: 300px;
                 margin-bottom: 10px;
-                border-right: none;
                 border-bottom: 1px solid #ddd;
+                border-radius: 25px;
             }
 
             .filter-container select:last-child {
-                border-bottom: none;
+                border-radius: 25px;
             }
 
             table {

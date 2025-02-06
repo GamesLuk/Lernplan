@@ -245,10 +245,10 @@
 </head>
 <body>
     <div class="header">
-        <a href="/">Home</a>
+        <a href="/dashboard">Home</a>
         <a href="/lernzeiten">Lernzeiten</a>
-        <a href="/about">Über uns</a>
-        <a href="/contact">Kontakt</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
     </div>
     
     <div class="container">
@@ -282,7 +282,7 @@
             </tr>
             
             {% for lernzeit in lernzeiten %}
-            <tr onclick="location.href='{{ lernzeit.link }}'" style="cursor: pointer;">
+            <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID={{lernzeit.lernzeit_ID}}&token={{token}}'" style="cursor: pointer;">
                 <td>{{ lernzeit.name }}</td>
                 <td>{{ lernzeit.teacher }}</td>
                 <td>{{ lernzeit.raum }}</td>
@@ -351,11 +351,25 @@
                 }
             }
         }
+
+        function lernzeit_info(lernzeit_ID) {
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch(`https://mzb-lev.de/lernzeit/info/?lernzeit_ID=${encodeURIComponent(lernzeit_ID)}&token={{token}}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+        }
     </script>
     <style>
         .hover-effect:hover {
             background-color: hsla(168, 100.00%, 29.80%, 0.30) !important;
         }
     </style>
+    
 </body>
 </html>

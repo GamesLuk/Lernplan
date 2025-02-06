@@ -2,7 +2,9 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'utils/auto-refresh-2_min.js' %}"></script>
     <title>Informationen</title>
     <style>
         body {
@@ -115,9 +117,12 @@
 
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;);
             gap: 20px;
             padding: 20px;
+            width: 90%; /* Erhöht die Breite des Containers */
+            max-width: 1200px; /* Setzt eine maximale Breite */
+            margin: 0 auto; /* Zentriert den Container */
         }
 
         .dashboard-item {
@@ -125,12 +130,20 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            
         }
 
-
+        .dashboard-item.relative {
+            width: 90%;
+            grid-column: 2;
+            grid-row: span 2;
+            
+            
+        }
 
         .dashboard-item.large {
-            grid-column: span 3;
+            width: 90%;
         }
 
         .dashboard-item h2 {
@@ -187,10 +200,10 @@
 </head>
 <body>
     <div class="header">
-        <a href="/">Home</a>
+        <a href="/dashboard">Home</a>
         <a href="/lernzeiten">Lernzeiten</a>
-        <a href="/about">Über uns</a>
-        <a href="/contact">Kontakt</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
     </div>
     
     <div class="container">
@@ -198,37 +211,19 @@
         
         <div class="dashboard">
             <div class="dashboard-item">
-                <h2>Titel der Lernzeit</h2>
-                <p>Mathematik Grundlagen</p>
+                <h2>{{lernzeit.name}}</h2>
+                <p>Raum: {{lernzeit.raum}}</p>
+                <p>Lehrer: {{lernzeit.teacher}}</p>
             </div>
-            <div class="dashboard-item">
-                <h2>Fach</h2>
-                <p>Mathematik</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Tag</h2>
-                <p>Montag</p>
+            <div class="dashboard-item relative">
+                <h2>{{lernzeit.teacher}}</h2>
+                <p></p>
             </div>
             <div class="dashboard-item large">
                 <h2>Beschreibung</h2>
-                <p>Einführung in die Grundlagen der Mathematik, inklusive Algebra und Geometrie. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>{{lernzeit.beschreibung}}</p>
             </div>
-            <div class="dashboard-item">
-                <h2>Lehrer</h2>
-                <p>Herr Müller</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Unbenanntes Feld 1</h2>
-                <p>Inhalt für unbenanntes Feld 1</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Unbenanntes Feld 2</h2>
-                <p>Inhalt für unbenanntes Feld 2</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Unbenanntes Feld 3</h2>
-                <p>Inhalt für unbenanntes Feld 3</p>
-            </div>
+            
             <!-- Weitere Dashboard-Felder können hier hinzugefügt werden -->
         </div>
         

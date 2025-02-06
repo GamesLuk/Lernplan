@@ -80,8 +80,12 @@ def lernzeiten_info(request):
     def lernzeiten_info(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         
-        id = request.GET.get("id", " ")
+        id = request.GET.get("lernzeit_ID", " ")
 
-        return render(request, "main/lernzeiten_info.html")
+        vars = {
+            "lernzeit": LernzeitProfile.objects.get(lernzeit_ID=id),
+        }
+
+        return render(request, "main/lernzeiten_info.html", vars)
 
     return lernzeiten_info(request)

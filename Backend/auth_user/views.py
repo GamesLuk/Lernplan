@@ -189,6 +189,7 @@ def fake_login(request):
         vars = {
             "fakes": get_Fakes(),
             "request": request,
+            "token": settings.TOKEN
         }
         return render(request, "basic/fake_login.html", vars)
     

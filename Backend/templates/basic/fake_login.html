@@ -8,15 +8,44 @@
     <hr>
     <ul>
     {% for login in fakes %}
-    <li><a onclick="login_fake({{login}})" href="#">{{login}}</a></li>
+    <li><a onclick="login_fake('{{login}}')" href="#">{{login}}</a></li>
     {% endfor %}
     </ul>
 
     <script>
         function login_fake(login) {
-             
+            console.log("login_fake function called with login:", login); // Debug-Ausgabe
+
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetch(`https://mzb-lev.de/run/login_fake/?login=${encodeURIComponent(login)}&token=fkji4hht4iifgndfkg`, { method: 'POST' , headers: {'Content-Type': 'application/json','X-CSRFToken': csrfToken  }})
+            console.log("CSRF Token:", csrfToken); // Debug-Ausgabe
+
+            fetch(`https://mzb-lev.de/run/login_fake/?login=${encodeURIComponent(login)}&token=fkji4hht4iifgndfkg`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(response => {
+                console.log("Response status:", response.status); // Debug-Ausgabe
+                if (response.status === 204) {
+                    return null; // Keine Antwort erwartet
+                }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data) {
+                    console.log("Response data:", data); // Debug-Ausgabe
+                } else {
+                    console.log("No content returned"); // Debug-Ausgabe
+                }
+            })
+            .catch(error => {
+                console.error("There was a problem with the fetch operation:", error); // Debug-Ausgabe
+            });
         }
     </script>
 </body>

@@ -72,5 +72,16 @@ def lernzeiten(request):
     
     return lernzeiten(request)
 
+
 def lernzeiten_info(request):
-    return HttpResponse(" ")
+
+    set_Session_Value(request, settings.REQUESTED_URL_NAME, "main:lernzeiten_info")
+
+    def lernzeiten_info(request):
+        set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
+        
+        id = request.GET.get("id", " ")
+
+        return render(request, "main/lernzeiten_info.html")
+
+    return lernzeiten_info(request)

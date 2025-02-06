@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informationen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Heller Hintergrund passend zu den aktuellen Farben */
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+        }
+
+        .body::-webkit-scrollbar {
+        display: hidden;
+        }
+
+        .body {
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
+        }
+
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+
+        .header {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow: auto; /* Enable scrolling */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .info-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-container h2 {
+            color: #009879;
+            margin-bottom: 10px;
+        }
+
+        .info-container p {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .button-container a:hover {
+            background-color: #007f67;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .dashboard-item {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .dashboard-item.large {
+            grid-column: span 3;
+        }
+
+        .dashboard-item h2 {
+            color: #009879;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-item p {
+            color: #333;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .header a {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .info-container {
+                padding: 15px;
+            }
+
+            .info-container h2 {
+                font-size: 20px;
+            }
+
+            .info-container p {
+                font-size: 14px;
+            }
+
+            .button-container a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/lernzeiten">Lernzeiten</a>
+        <a href="/about">Über uns</a>
+        <a href="/contact">Kontakt</a>
+    </div>
+    
+    <div class="container">
+        <h1>Informationen</h1>
+        
+        <div class="dashboard">
+            <div class="dashboard-item">
+                <h2>Titel der Lernzeit</h2>
+                <p>Mathematik Grundlagen</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Fach</h2>
+                <p>Mathematik</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Tag</h2>
+                <p>Montag</p>
+            </div>
+            <div class="dashboard-item large">
+                <h2>Beschreibung</h2>
+                <p>Einführung in die Grundlagen der Mathematik, inklusive Algebra und Geometrie. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Lehrer</h2>
+                <p>Herr Müller</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Unbenanntes Feld 1</h2>
+                <p>Inhalt für unbenanntes Feld 1</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Unbenanntes Feld 2</h2>
+                <p>Inhalt für unbenanntes Feld 2</p>
+            </div>
+            <div class="dashboard-item">
+                <h2>Unbenanntes Feld 3</h2>
+                <p>Inhalt für unbenanntes Feld 3</p>
+            </div>
+            <!-- Weitere Dashboard-Felder können hier hinzugefügt werden -->
+        </div>
+        
+        <div class="button-container">
+            <a href="/register">Anmelden</a>
+        </div>
+    </div>
+</body>
+</html>

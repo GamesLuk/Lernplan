@@ -1,6 +1,6 @@
 from decorators.permissions import only_localhost
 from system.models import StudentProfile
-from utils.system import setKlasse_Role, getLernzeit_ID
+from utils.system import setKlasse_Role, getLernzeit_ID, debug
 from utils.session import set_Session_Value
 from django.http import HttpResponse
 import json
@@ -8,13 +8,21 @@ from system.models import LernzeitProfile
 
 def run_login(request):
 
+    print("Login function called")  # Debug-Ausgabe
+    debug(["Logged in as:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"])
+
     login = request.GET.get("login", " ")
     token = request.GET.get("token", " ")
 
+    print(f"Received login: {login}, token: {token}")  # Debug-Ausgabe
+
     if token != "fkji4hht4iifgndfkg":
-        return
+        print("Invalid token")  # Debug-Ausgabe
+        return HttpResponse(status=400)
 
     def login_fake(school_IDx, request):
+
+        print(f"login_fake called with school_IDx: {school_IDx}")  # Debug-Ausgabe
 
         setKlasse_Role(school_IDx)
 
@@ -32,6 +40,8 @@ def run_login(request):
         }
 
         set_Session_Value(request, "logged_in", True)
+
+        debug(["Logged in as:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"])
 
         return "main:welcome"
     

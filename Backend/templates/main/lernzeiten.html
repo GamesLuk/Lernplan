@@ -10,6 +10,26 @@
             margin: 0;
             padding: 0;
             background-color: #e0f7fa; /* Heller Hintergrund passend zu den aktuellen Farben */
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+        }
+
+        .body::-webkit-scrollbar {
+        display: hidden;
+        }
+
+        .body {
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
+        }
+
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
         }
 
         .header {
@@ -60,15 +80,25 @@
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
+            border-color: #fff;
+            color: #000000;
+            border: 1px solid #ddd;
+            border-radius: 25px;
         }
 
         .search-container input {
             padding: 10px;
             font-size: 16px;
-            border: 1px solid #ddd;
+            border: 1px solid #bbb;
             border-radius: 25px;
             flex: 1;
             min-width: 150px;
+            color: #000000;
+            background-color: #f9f9f9;
+        }
+
+        .search-container input:focus {
+            outline: none; /* Disable black border when typing */
         }
 
         .filter-container {
@@ -79,7 +109,7 @@
             border: 1px solid #bbb;
             border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+
         }
 
         .filter-container select {
@@ -123,7 +153,7 @@
 
         th, td {
             padding: 12px 15px;
-            width: 16.66%; /* Gleichmäßige Verteilung der Spaltenbreite */
+            width: 20%; /* Adjusted for 5 columns */
         }
 
         th {
@@ -229,14 +259,7 @@
         </div>
         
         <div class="filter-container">
-            <select id="fachFilter" onchange="filterTable()">
-                <option value="">Alle Fächer</option>
-                {% for lernzeit in lernzeiten %}
-                    <option value="{{ lernzeit.fach }}">{{ lernzeit.fach }}</option>
-                {% endfor %}
-            </select>
             <select id="datumFilter" onchange="filterTable()">
-                <option value="">Alle Wochentage</option>
                 {% for lernzeit in lernzeiten %}
                     <option value="{{ lernzeit.tag }}">{{ lernzeit.tag }}</option>
                 {% endfor %}
@@ -272,9 +295,8 @@
 
     <script>
         function filterTable() {
-            var nameSearch, fachFilter, datumFilter, stundeFilter, table, tr, td, i, txtValue;
+            var nameSearch, datumFilter, stundeFilter, table, tr, td, i, txtValue;
             nameSearch = document.getElementById("nameSearch").value.toUpperCase();
-            fachFilter = document.getElementById("fachFilter").value.toUpperCase();
             datumFilter = document.getElementById("datumFilter").value.toUpperCase();
             stundeFilter = document.getElementById("stundeFilter").value.toUpperCase();
             table = document.getElementById("lernzeitenTable");
@@ -290,7 +312,6 @@
                     var tag = td[3].textContent || td[3].innerText;
                     var stunde = td[4].textContent || td[4].innerText;
                     if ((name.toUpperCase().indexOf(nameSearch) > -1 || !nameSearch) &&
-                        (fach.toUpperCase().indexOf(fachFilter) > -1 || !fachFilter) &&
                         (tag.toUpperCase().indexOf(datumFilter) > -1 || !datumFilter) &&
                         (stunde.toUpperCase().indexOf(stundeFilter) > -1 || !stundeFilter)) {
                         tr[i].style.display = "";
@@ -313,7 +334,6 @@
             });
 
             // Remove duplicate options
-            removeDuplicateOptions('fachFilter');
             removeDuplicateOptions('datumFilter');
             removeDuplicateOptions('stundeFilter');
         });

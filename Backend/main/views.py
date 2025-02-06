@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from decorators.permissions import login_required, role_required
 from utils.session import set_Session_Value, get_Session_Value, get_User_Value
 from django.conf import settings
-from utils.system import getSchool_ID, getDay
+from utils.system import getSchool_ID, getDay, debug
 from system.models import LernzeitProfile
 
 
@@ -45,12 +45,32 @@ def lernzeiten(request):
         if not stufe >= 11:
             lernzeiten = LernzeitProfile.objects.filter(stufen__contains=stufe).all()
         
+        def nextMonday():
+            from datetime import datetime, timedelta
+            today = datetime.today()
+            days_ahead = 0 - today.weekday()
+            if days_ahead <= 0:
+                days_ahead += 7
+            return today + timedelta(days_ahead)
+        
+        def nextThursday():
+            from datetime import datetime, timedelta
+            today = datetime.today()
+            days_ahead = 3 - today.weekday()
+            if days_ahead <= 0:
+                days_ahead += 7
+            return today + timedelta(days_ahead)
+        
+        debug([nextMonday(), nextThursday()])
 
         vars = {
             "klasse":klasse,
-            "lernzeiten":lernzeiten
+            "lernzeiten":lernzeiten,
         }
 
         return render(request, "main/lernzeiten.html", vars)
     
     return lernzeiten(request)
+
+def lernzeiten_info(request):
+    return HttpResponse(" ")

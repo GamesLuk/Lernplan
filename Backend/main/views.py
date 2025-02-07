@@ -6,6 +6,7 @@ from utils.session import set_Session_Value, get_Session_Value, get_User_Value
 from django.conf import settings
 from utils.system import getSchool_ID, getDay, debug
 from system.models import LernzeitProfile
+from django.utils import timezone
 
 
 # Create your views here.
@@ -84,6 +85,7 @@ def lernzeiten_info(request):
 
         vars = {
             "lernzeit": LernzeitProfile.objects.get(lernzeit_ID=id),
+            'timestamp': timezone.now().timestamp(),
         }
 
         return render(request, "main/lernzeiten_info.html", vars)

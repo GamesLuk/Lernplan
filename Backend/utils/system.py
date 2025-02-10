@@ -33,6 +33,22 @@ def getLernzeit_ID():
     )
     return lernzeit_ID
 
+def getAnmeldung_ID():
+    id = system.objects.filter(name="anmeldung_ID").values("value").first()
+
+    if not id:
+        id = system.objects.create(
+            name="anmeldung_ID",
+            value="1"
+        )
+    
+    anmeldung_ID = id["value"]
+    system.objects.update(
+        value=int(anmeldung_ID) + 1
+    )
+    return anmeldung_ID
+
+
 def debug(message):
     for text in message:
         print(text)
@@ -69,7 +85,6 @@ def setKlasse_Role(school_IDx):
             StudentProfile.objects.filter(school_ID=school_IDx).update(klasse=klasse)
 
     # All - alle die nicht -> name - preset -> Klasse
-
 
 def getStudent(filter, parameter, value):
     if filter == "school_ID":

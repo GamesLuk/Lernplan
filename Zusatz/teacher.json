@@ -1,0 +1,602 @@
+[
+    {
+        "teacher": "AB",
+        "first_name": "Judith",
+        "last_name": "Abel",
+        "fächer": ["D", "SW"]
+    },
+    {
+        "teacher": "AM",
+        "first_name": "Natascha",
+        "last_name": "Albersmann",
+        "fächer": ["M", "CH"]
+    },
+    {
+        "teacher": "AS",
+        "first_name": "Matthias",
+        "last_name": "Asher",
+        "fächer": ["BI", "CH"]
+    },
+    {
+        "teacher": "BE",
+        "first_name": "Katharina",
+        "last_name": "Bernds",
+        "fächer": ["M", "CH"]
+    },
+    {
+        "teacher": "BÖ",
+        "first_name": "Brigitte",
+        "last_name": "Böhle",
+        "fächer": ["L"]
+    },
+    {
+        "teacher": "BF",
+        "first_name": "Nikolas",
+        "last_name": "Bornefeld",
+        "fächer": ["M", "PA"]
+    },
+    {
+        "teacher": "BOS",
+        "first_name": "Mechthild",
+        "last_name": "Bosbach",
+        "fächer": ["D", "MU"]
+    },
+    {
+        "teacher": "BD",
+        "first_name": "Tobias",
+        "last_name": "Brand",
+        "fächer": ["SP", "SW"]
+    },
+    {
+        "teacher": "BRO",
+        "first_name": "Christian",
+        "last_name": "Brosch",
+        "fächer": ["PA", "SW"]
+    },
+    {
+        "teacher": "BRU",
+        "first_name": "Vera",
+        "last_name": "Brunkau",
+        "fächer": ["E", "D"]
+    },
+    {
+        "teacher": "BU",
+        "first_name": "Jens",
+        "last_name": "Bußmann",
+        "fächer": ["M", "SP"]
+    },
+    {
+        "teacher": "DK",
+        "first_name": "Marieke",
+        "last_name": "Daeter-Kunneman",
+        "fächer": ["Sozialpädagogin"]
+    },
+    {
+        "teacher": "DE",
+        "first_name": "Athisakthy",
+        "last_name": "Dederichs",
+        "fächer": ["M", "IF"]
+    },
+    {
+        "teacher": "DO",
+        "first_name": "Kerstin",
+        "last_name": "Dolinski",
+        "fächer": ["D", "PÄ", "DaZ", "KR"]
+    },
+    {
+        "teacher": "DÖR",
+        "first_name": "Anja",
+        "last_name": "Dörner",
+        "fächer": ["D", "E"]
+    },
+    {
+        "teacher": "DR",
+        "first_name": "Christian",
+        "last_name": "Drach",
+        "fächer": ["GE", "EK"]
+    },
+    {
+        "teacher": "ED",
+        "first_name": "Uta",
+        "last_name": "Eder",
+        "fächer": ["L", "KR"]
+    },
+    {
+        "teacher": "EL",
+        "first_name": "Teresa",
+        "last_name": "Elias",
+        "fächer": ["E", "D", "KR"]
+    },
+    {
+        "teacher": "EN",
+        "first_name": "Theresa",
+        "last_name": "Engels",
+        "fächer": ["F", "S", "DAZ"]
+    },
+    {
+        "teacher": "FS",
+        "first_name": "Markus",
+        "last_name": "Fels",
+        "fächer": ["M", "PH"]
+    },
+    {
+        "teacher": "FI",
+        "first_name": "Kira",
+        "last_name": "Fischer",
+        "fächer": ["BI", "F"]
+    },
+    {
+        "teacher": "GL",
+        "first_name": "Kamile",
+        "last_name": "Gecgel",
+        "fächer": ["D", "PP"]
+    },
+    {
+        "teacher": "GDM",
+        "first_name": "Cerstin",
+        "last_name": "Geldmacher",
+        "fächer": ["D", "SW"]
+    },
+    {
+        "teacher": "GM",
+        "first_name": "Sabine",
+        "last_name": "Gelies-Mould",
+        "fächer": ["E", "SP"]
+    },
+    {
+        "teacher": "GE",
+        "first_name": "Dorothea",
+        "last_name": "Germer",
+        "fächer": ["D", "GE"]
+    },
+    {
+        "teacher": "GG",
+        "first_name": "Jan",
+        "last_name": "Gerngross",
+        "fächer": ["KU"]
+    },
+    {
+        "teacher": "GRE",
+        "first_name": "Dany",
+        "last_name": "Grefenstein",
+        "fächer": ["M", "SP"]
+    },
+    {
+        "teacher": "HLF",
+        "first_name": "Heike",
+        "last_name": "Halfenberg",
+        "fächer": ["M", "CH"]
+    },
+    {
+        "teacher": "HEI",
+        "first_name": "Sarah",
+        "last_name": "Heister",
+        "fächer": ["L", "GE", "DaZ"]
+    },
+    {
+        "teacher": "HLM",
+        "first_name": "Lena",
+        "last_name": "Helmer",
+        "fächer": ["MU", "PA"]
+    },
+    {
+        "teacher": "HÖ",
+        "first_name": "Ursula",
+        "last_name": "Höche",
+        "fächer": ["M", "PL", "PP", "SP"]
+    },
+    {
+        "teacher": "HOH",
+        "first_name": "Reinhild",
+        "last_name": "Hohmann",
+        "fächer": ["E", "F", "S"]
+    },
+    {
+        "teacher": "HB",
+        "first_name": "Manuela",
+        "last_name": "Hübl",
+        "fächer": ["D", "F"]
+    },
+    {
+        "teacher": "ISH",
+        "first_name": "Hanna",
+        "last_name": "Ishorst",
+        "fächer": ["E", "S", "BI"]
+    },
+    {
+        "teacher": "IW",
+        "first_name": "Gregor",
+        "last_name": "Iwanoff",
+        "fächer": ["D", "SP"]
+    },
+    {
+        "teacher": "JR",
+        "first_name": "Monika",
+        "last_name": "Jäger",
+        "fächer": ["M", "IF"]
+    },
+    {
+        "teacher": "JO",
+        "first_name": "Stefanie",
+        "last_name": "Jordan",
+        "fächer": ["D", "GE"]
+    },
+    {
+        "teacher": "KAM",
+        "first_name": "Claudia",
+        "last_name": "Kamps",
+        "fächer": ["L", "GE", "SP", "DAZ"]
+    },
+    {
+        "teacher": "KA",
+        "first_name": "Elke",
+        "last_name": "Kanter-Thull",
+        "fächer": ["E", "S"]
+    },
+    {
+        "teacher": "KNY",
+        "first_name": "Alexander",
+        "last_name": "Knyazev",
+        "fächer": ["SP"]
+    },
+    {
+        "teacher": "KRÜ",
+        "first_name": "Lena",
+        "last_name": "Krüsemann",
+        "fächer": ["E", "EK"]
+    },
+    {
+        "teacher": "KH",
+        "first_name": "Gerold",
+        "last_name": "Kruth",
+        "fächer": ["D", "EK"]
+    },
+    {
+        "teacher": "KÜH",
+        "first_name": "Manuel",
+        "last_name": "Kühn",
+        "fächer": ["SP"]
+    },
+    {
+        "teacher": "KS",
+        "first_name": "Regina",
+        "last_name": "Küppers",
+        "fächer": ["F", "MU"]
+    },
+    {
+        "teacher": "KP",
+        "first_name": "Rolf",
+        "last_name": "Küppers",
+        "fächer": ["L", "PL/PP"]
+    },
+    {
+        "teacher": "LG",
+        "first_name": "Jens",
+        "last_name": "Laga",
+        "fächer": ["EK", "SP"]
+    },
+    {
+        "teacher": "LN",
+        "first_name": "Cristina",
+        "last_name": "Langanke",
+        "fächer": ["E", "KU"]
+    },
+    {
+        "teacher": "LEY",
+        "first_name": "Oliver",
+        "last_name": "Ley",
+        "fächer": ["CH", "BI"]
+    },
+    {
+        "teacher": "LIM",
+        "first_name": "Andrea",
+        "last_name": "Limberg",
+        "fächer": ["KU", "PA"]
+    },
+    {
+        "teacher": "LI",
+        "first_name": "Katharina",
+        "last_name": "Lingnau",
+        "fächer": ["D", "KU"]
+    },
+    {
+        "teacher": "LO",
+        "first_name": "Judith",
+        "last_name": "Lohmann",
+        "fächer": ["M", "BI"]
+    },
+    {
+        "teacher": "LÖH",
+        "first_name": "Marie",
+        "last_name": "Löhrer",
+        "fächer": ["Sozialarbeiterin"]
+    },
+    {
+        "teacher": "Lubello",
+        "first_name": "Simone",
+        "last_name": "",
+        "fächer": ["Schulsozialarbeiterin"]
+    },
+    {
+        "teacher": "LÜ",
+        "first_name": "Anja",
+        "last_name": "Lütke",
+        "fächer": ["E", "BI"]
+    },
+    {
+        "teacher": "MEI",
+        "first_name": "Vanessa",
+        "last_name": "Meier",
+        "fächer": ["KU"]
+    },
+    {
+        "teacher": "MG",
+        "first_name": "Markus",
+        "last_name": "Mergard",
+        "fächer": ["M", "IF"]
+    },
+    {
+        "teacher": "MIL",
+        "first_name": "Vera",
+        "last_name": "Milles",
+        "fächer": ["E", "D", "LIT"]
+    },
+    {
+        "teacher": "MD",
+        "first_name": "Daniel",
+        "last_name": "Modler",
+        "fächer": ["SP", "EK"]
+    },
+    {
+        "teacher": "MO",
+        "first_name": "Sarah",
+        "last_name": "Monschau-Gensel",
+        "fächer": ["D", "GE"]
+    },
+    {
+        "teacher": "MOT",
+        "first_name": "Barbara",
+        "last_name": "Mott",
+        "fächer": ["E", "D"]
+    },
+    {
+        "teacher": "MR",
+        "first_name": "Anne",
+        "last_name": "Müller-Ruckwitt",
+        "fächer": ["D", "E", "GE"]
+    },
+    {
+        "teacher": "MÜ",
+        "first_name": "Manuel",
+        "last_name": "Müller",
+        "fächer": ["BI", "SP"]
+    },
+    {
+        "teacher": "NIE",
+        "first_name": "Sandra",
+        "last_name": "Niederhoff",
+        "fächer": ["BI", "MU", "CH"]
+    },
+    {
+        "teacher": "OR",
+        "first_name": "Tim",
+        "last_name": "Ortelbach",
+        "fächer": ["E", "SP"]
+    },
+    {
+        "teacher": "PA",
+        "first_name": "Anke",
+        "last_name": "Paaßens",
+        "fächer": ["F"]
+    },
+    {
+        "teacher": "PN",
+        "first_name": "Alessandra",
+        "last_name": "Pannhausen",
+        "fächer": ["D", "E", "PP"]
+    },
+    {
+        "teacher": "RD",
+        "first_name": "Karsten",
+        "last_name": "Reinold",
+        "fächer": ["M", "GE"]
+    },
+    {
+        "teacher": "RF",
+        "first_name": "Gudrun",
+        "last_name": "Rodefeld",
+        "fächer": ["CH", "PH"]
+    },
+    {
+        "teacher": "RO",
+        "first_name": "Dirk",
+        "last_name": "Roth",
+        "fächer": ["D", "EK"]
+    },
+    {
+        "teacher": "RÜ",
+        "first_name": "Reinhard",
+        "last_name": "Rückamp",
+        "fächer": ["M", "PH"]
+    },
+    {
+        "teacher": "SH",
+        "first_name": "Bruno",
+        "last_name": "Schiele",
+        "fächer": ["M", "GE"]
+    },
+    {
+        "teacher": "SM",
+        "first_name": "Margot",
+        "last_name": "Schlömer",
+        "fächer": ["E", "S"]
+    },
+    {
+        "teacher": "STZ",
+        "first_name": "Ansgar",
+        "last_name": "Schmitz",
+        "fächer": ["L", "KR", "PP"]
+    },
+    {
+        "teacher": "SIT",
+        "first_name": "Kirsten",
+        "last_name": "Schmitz",
+        "fächer": ["KU", "PA", "LIT"]
+    },
+    {
+        "teacher": "SOT",
+        "first_name": "Petra",
+        "last_name": "Schorcht",
+        "fächer": ["F", "D"]
+    },
+    {
+        "teacher": "SLE",
+        "first_name": "Claudia",
+        "last_name": "Schulte",
+        "fächer": ["D", "BI", "DaZ"]
+    },
+    {
+        "teacher": "SÜ",
+        "first_name": "Petra",
+        "last_name": "Schütte",
+        "fächer": ["SP", "CH"]
+    },
+    {
+        "teacher": "SEI",
+        "first_name": "Benedict",
+        "last_name": "Seim",
+        "fächer": ["CH", "SP"]
+    },
+    {
+        "teacher": "SI",
+        "first_name": "Jan",
+        "last_name": "Siebertz",
+        "fächer": ["BI", "SW"]
+    },
+    {
+        "teacher": "SIM",
+        "first_name": "Silke",
+        "last_name": "Simons-Haas",
+        "fächer": ["GE", "SP"]
+    },
+    {
+        "teacher": "SO",
+        "first_name": "David",
+        "last_name": "Sonnabend",
+        "fächer": ["CH", "SP"]
+    },
+    {
+        "teacher": "STN",
+        "first_name": "Marie-Christin",
+        "last_name": "Stein",
+        "fächer": ["M", "PH"]
+    },
+    {
+        "teacher": "STO",
+        "first_name": "Franziska",
+        "last_name": "Stolz",
+        "fächer": ["D", "E"]
+    },
+    {
+        "teacher": "TE",
+        "first_name": "Katja",
+        "last_name": "Tenbrock-Ingenhorst",
+        "fächer": ["BI", "D"]
+    },
+    {
+        "teacher": "THE",
+        "first_name": "Anne Carine",
+        "last_name": "Theobald",
+        "fächer": ["BI", "D"]
+    },
+    {
+        "teacher": "TN",
+        "first_name": "Stefan",
+        "last_name": "Thielen",
+        "fächer": ["M", "PH"]
+    },
+    {
+        "teacher": "TL",
+        "first_name": "Stefan",
+        "last_name": "Thul",
+        "fächer": ["M", "PH"]
+    },
+    {
+        "teacher": "TP",
+        "first_name": "Mattis",
+        "last_name": "Tipke",
+        "fächer": ["SP", "GE"]
+    },
+    {
+        "teacher": "BY",
+        "first_name": "Lena",
+        "last_name": "van Betteraey",
+        "fächer": ["MU", "PL", "PP", "IF"]
+    },
+    {
+        "teacher": "WA",
+        "first_name": "Franziska",
+        "last_name": "Wagener",
+        "fächer": ["D", "F"]
+    },
+    {
+        "teacher": "WEI",
+        "first_name": "Susanne",
+        "last_name": "Weippert",
+        "fächer": ["E", "EK"]
+    },
+    {
+        "teacher": "WL",
+        "first_name": "Wilhelm",
+        "last_name": "Westphal",
+        "fächer": ["E", "SP"]
+    },
+    {
+        "teacher": "WY",
+        "first_name": "Torben",
+        "last_name": "Weyerbrock",
+        "fächer": ["GE", "M"]
+    },
+    {
+        "teacher": "WF",
+        "first_name": "Andreas",
+        "last_name": "Wolf",
+        "fächer": ["SW", "SP"]
+    },
+    {
+        "teacher": "ZA",
+        "first_name": "Werner",
+        "last_name": "Zander",
+        "fächer": ["D", "PL", "PP"]
+    },
+    {
+        "teacher": "ZER",
+        "first_name": "Renate",
+        "last_name": "Zerr",
+        "fächer": ["ER", "Schulpfarrerin"]
+    },
+    {
+        "teacher": "ZG",
+        "first_name": "Olilia",
+        "last_name": "Ziegs",
+        "fächer": ["S", "EK"]
+    },
+    {
+        "teacher": "ZM",
+        "first_name": "Julia",
+        "last_name": "Zimmermann",
+        "fächer": ["M", "S", "SW"]
+    },
+    {
+        "teacher": "ZI",
+        "first_name": "Heidrun",
+        "last_name": "Zinn",
+        "fächer": ["D", "E", "ER"]
+    },
+    {
+        "teacher": "ZU",
+        "first_name": "Stephan",
+        "last_name": "Zurheide",
+        "fächer": ["E", "PA"]
+    }
+]

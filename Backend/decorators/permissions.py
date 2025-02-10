@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from functools import wraps
+from system.models import StudentProfile
 
 def login_required(view_func):
     @wraps(view_func)
@@ -23,6 +24,30 @@ def role_required(role):
             return view_func(request, *args, **kwargs)
         return wrapper
     return decorator
+
+def not_Student(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        user = request.session.get('user')
+        if not user:
+            return redirect("auth:login")  # Redirect if user is not logged in
+        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')["school_ID"]).first()
+        if not student_profile or student_profile.role == "0":
+            return redirect("main:welcome")  # Redirect if role is 0 or profile not found
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
+def only_students(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        user = request.session.get('user')
+        if not user:
+            return redirect("auth:login")  # Redirect if user is not logged in
+        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')["school_ID"]).first()
+        if not student_profile or student_profile.role != "0":
+            return redirect("main:welcome")  # Redirect if role is not 0 or profile not found
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 from django.http import HttpResponseForbidden
 

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="{% static 'utils/auto-refresh-2_min.js' %}?v={{ timestamp }}"></script>
     <title>Lernzeiten</title>
     <style>
         body {
@@ -240,6 +242,14 @@
             th, td {
                 padding: 8px 10px;
             }
+
+            red {
+                color: red;
+            }
+
+            green {
+                color: green;
+            }
         }
     </style>
 </head>
@@ -279,16 +289,22 @@
                 <th>Raum</th>
                 <th>Tag</th>
                 <th>Stunde</th>
+                <th></th>
             </tr>
             
             {% for lernzeit in lernzeiten %}
-            <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID={{lernzeit.lernzeit_ID}}&token={{token}}'" style="cursor: pointer;">
-                <td>{{ lernzeit.name }}</td>
-                <td>{{ lernzeit.teacher }}</td>
-                <td>{{ lernzeit.raum }}</td>
-                <td>{{ lernzeit.tag }}</td>
-                <td>{{ lernzeit.stunde }}</td>
-            </tr>
+                {% if lernzeit.type != 0 or lernzeit.type != 1 %}
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID={{lernzeit.lernzeit_ID}}&token={{token}}'" style="cursor: pointer;">
+                        <td>{{ lernzeit.name }}</td>
+                        <td>{{ lernzeit.teacher }}</td>
+                        <td>{{ lernzeit.raum }}</td>
+                        <td>{{ lernzeit.tag }}</td>
+                        <td>{{ lernzeit.stunde }}</td>
+                        <td style="text-align: center">{% if lernzeit.type == 0 %}{% endif %}
+                            {% if lernzeit.type == 1 %}&#9997;{% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </table>
     </div>
@@ -336,6 +352,14 @@
             // Remove duplicate options
             removeDuplicateOptions('datumFilter');
             removeDuplicateOptions('stundeFilter');
+
+            // Set default filter to Monday (or any other day)
+            const defaultDay = "Mo"; // Change this to the desired default day
+            const filterElement = document.querySelector("#datumFilter");
+            if (filterElement) {
+                filterElement.value = defaultDay;
+                filterElement.dispatchEvent(new Event('change')); // Trigger change event to apply the filter
+            }
         });
 
         function removeDuplicateOptions(selectId) {

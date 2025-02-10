@@ -1,6 +1,6 @@
 import threading
 import time
-from system.models import StudentProfile
+from system.models import StudentProfile, LernzeitProfile, system, AnmeldungProfile, 
 from utils.system import setKlasse_Role
 
 def set_Klasse_Role():
@@ -16,3 +16,20 @@ def start_task(task):
 
 #-----------------------------------------------------------------------------------------------#
 
+from celery import shared_task
+from django.core.cache import cache
+from .models import LernzeitProfile
+
+@shared_task
+def update_cache():
+    print("🔄 Aktualisiere Cache mit Datenbank...")
+    data = list(
+
+        LernzeitProfile.objects.all(),
+        StudentProfile.objects.all(),
+        system.objects.all(),
+        AnmeldungProfile.objects.all()
+        
+        )  # Datenbankabfrage
+    cache.set("mymodel_queryset", data, timeout=300)  # 15 Min Cache
+    print("✅ Cache aktualisiert!")

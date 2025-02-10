@@ -102,27 +102,29 @@
             margin-top: 20px;
         }
 
-        .button-container a {
+        .button-container button {
             background-color: #009879;
             color: #ffffff;
             padding: 10px 20px;
             border-radius: 25px;
             text-decoration: none;
             font-size: 16px;
+            border-color: transparent
         }
 
-        .button-container a:hover {
+        .button-container button:hover {
             background-color: #007f67;
         }
 
         .dashboard {
             display: grid;
-            grid-template-columns: 1fr 1fr;);
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             padding: 20px;
             width: 90%; /* Erhöht die Breite des Containers */
             max-width: 1200px; /* Setzt eine maximale Breite */
             margin: 0 auto; /* Zentriert den Container */
+            min-height: 500px; /* Setzt eine minimale Höhe, um das Zittern zu verhindern */
         }
 
         .dashboard-item {
@@ -226,10 +228,12 @@
             
             <!-- Weitere Dashboard-Felder können hier hinzugefügt werden -->
         </div>
-        
-        <div class="button-container">
-            <a href="/register">Anmelden</a>
-        </div>
+        {% if lernzeit.type == 1 %}
+        <form method="POST" action="https://mzb-lev.de/run/lz_register/?lz_ID={{lernzeit.lernzeit_ID}}&stunde={{lernzeit.stunde}}&final_date={{final_date}}" class="button-container">
+            {% csrf_token %}
+            <button type="submit" >Anmelden</button>
+        </form>
+        {% endif %}
     </div>
 </body>
 </html>

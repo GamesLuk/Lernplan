@@ -9,6 +9,8 @@ from utils.system import debug, getSchool_ID, setKlasse_Role
 from django.http import HttpResponse
 from django.db.models.functions import Cast
 from decorators.permissions import login_required, role_required
+from django.core.files.base import ContentFile
+import base64
 
 
 def microsoft_login(request):
@@ -76,7 +78,13 @@ def microsoft_callback(request):
 
     #debug(["User Info:", user_info])
 
+    # Fetch profile picture URL
+    profile_picture_url = f"https://graph.microsoft.com/v1.0/me/photo/$value"
 
+    # Fetch profile picture
+    profile_picture_response = requests.get(profile_picture_url, headers=headers)
+    profile_picture_content = profile_picture_response.content
+    profile_picture_base64 = base64.b64encode(profile_picture_content).decode('utf-8')
 
 
     #--------------------------------------------------- Speicherung -----------------------------------------------------------------#
@@ -112,6 +120,7 @@ def microsoft_callback(request):
             "klasse": 0,
             "stufe": 0,
             "role": 1,
+            "profile_picture": profile_picture_base64,
 
         }
     )
@@ -121,6 +130,7 @@ def microsoft_callback(request):
         StudentProfile.objects.filter(email=user_info.get("mail") or user_info.get('userPrincipalName')).update(
 
             teams = teams_info.get('value', []),
+            profile_picture=profile_picture_base64,
 
         )
         if settings.DEBUG:
@@ -132,7 +142,7 @@ def microsoft_callback(request):
 
     # Speicherung der Daten in der Session
     request.session['user'] = {
-        "school_ID": StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first(),                                                 # 10000, 10001, ...
+        "school_ID": StudentProfile.objects.filter(email=user_info.get("mail")).values("school_ID").first()["school_ID"],                                                 # 10000, 10001, ...
         'name': user_info.get('displayName'),                                   # Voller Name
         "first_name":user_info.get("givenName"),
         "last_name": user_info.get("surname"),                                  
@@ -141,6 +151,7 @@ def microsoft_callback(request):
         "klasse": StudentProfile.objects.filter(email=user_info.get("mail")).values("klasse").first(),                                                            # a,b,c,d,e, ...
         "stufe": StudentProfile.objects.filter(email=user_info.get("mail")).values("stufe").first(),                                                             # 5,6,7,8,9, ...
         'role': StudentProfile.objects.filter(email=user_info.get("mail")).values("role").first(),                                                              # Schüler, Lehrer, Admin, ...
+        "profile_picture": profile_picture_base64,
 
     }
 
@@ -166,7 +177,7 @@ def microsoft_callback(request):
     if requested_url != None:
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         return redirect(requested_url)
-    return redirect('main:home')
+    return redirect('main:dashboard')
 
     #-----------------------------------------------------------------------------------------------------------------------------#
     #-----------------------------------------------------------------------------------------------------------------------------#
@@ -198,4 +209,10 @@ def fake_login(request):
 
 def get_Fakes():
     return list(StudentProfile.objects.filter(school_ID__startswith="9").values_list("school_ID", flat=True))
+
+
+@login_required
+def profile_view(request):
+    user_profile = StudentProfile.objects.get(email=request.user.email)
+    return render(request, 'main/profile.html', {'user': user_profile})
 

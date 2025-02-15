@@ -19,9 +19,8 @@ class StudentProfile(models.Model):
     klasse = models.CharField(max_length=1, db_index=True)
     stufe = models.IntegerField(db_index=True)
     role = models.CharField(max_length=255, db_index=True)
-    fächer = models.JSONField(default=list, db_index=True)
     beschreibung = models.TextField(null=True, default=None)
-    kürzel = models.CharField(max_length=10, db_index=True, null=True, default=None)
+    profile_picture = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -56,3 +55,22 @@ class AnmeldungProfile(models.Model):
 
     def __str__(self):
         return str(self.anmeldung_ID)
+    
+class TeacherProfile(models.Model):
+
+    school_ID = models.IntegerField(db_index=True, unique=True, null=True)
+    name = models.CharField(max_length=255, db_index=True)
+    first_name = models.CharField(max_length=255, db_index=True)
+    last_name = models.CharField(max_length=255, db_index=True)
+    email = models.EmailField(unique=True, db_index=True)
+    teams = models.JSONField(default=list, db_index=True, null=True)  # Speichert eine Liste der Teams des Benutzers
+    klassen = models.JSONField(db_index=True)
+    role = models.CharField(max_length=255, db_index=True)
+    fächer = models.JSONField(default=list, db_index=True)
+    beschreibung = models.TextField(null=True, default=None)
+    kürzel = models.CharField(max_length=10, db_index=True, null=True, default=None)
+    profile_picture = models.TextField(null=True, blank=True)
+    lernzeiten = models.JSONField(default=list, db_index=True)
+
+    def __str__(self):
+        return self.name

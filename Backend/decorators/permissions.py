@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from functools import wraps
 from system.models import StudentProfile
+from utils.system import debug
 
 def login_required(view_func):
     @wraps(view_func)
@@ -31,7 +32,8 @@ def not_Student(view_func):
         user = request.session.get('user')
         if not user:
             return redirect("auth:login")  # Redirect if user is not logged in
-        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')["school_ID"]).first()
+        debug([user, user.get('school_ID')])
+        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')).first()
         if not student_profile or student_profile.role == "0":
             return redirect("main:welcome")  # Redirect if role is 0 or profile not found
         return view_func(request, *args, **kwargs)
@@ -43,7 +45,7 @@ def only_students(view_func):
         user = request.session.get('user')
         if not user:
             return redirect("auth:login")  # Redirect if user is not logged in
-        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')["school_ID"]).first()
+        student_profile = StudentProfile.objects.filter(school_ID=user.get('school_ID')).first()
         if not student_profile or student_profile.role != "0":
             return redirect("main:welcome")  # Redirect if role is not 0 or profile not found
         return view_func(request, *args, **kwargs)

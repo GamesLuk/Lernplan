@@ -6,7 +6,7 @@ from decorators.permissions import login_required, role_required, not_Student, o
 from utils.session import set_Session_Value, get_Session_Value, get_User_Value
 from django.conf import settings
 from utils.system import getSchool_ID, getDay, debug
-from system.models import LernzeitProfile, AnmeldungProfile
+from system.models import LernzeitProfile, AnmeldungProfile, StudentProfile
 from django.utils import timezone
 
 
@@ -145,7 +145,7 @@ def lehrer_dashboard(request):
     @not_Student
     def teacher_dashboard(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
-        return render(request, "main/teacher_dashboard.html")
+        return render(request, "lehrer/dashboard.html")
 
     return teacher_dashboard(request)
 
@@ -211,3 +211,12 @@ def lernzeit_calendar(request):
         return render(request, "main/my_lernzeiten.html", vars)
 
     return lernzeit_calendar(request)
+
+@login_required
+def profile_view(request):
+    user_profile = StudentProfile.objects.get(email=request.session['user']['email'])
+    profile_picture_base64 = user_profile.profile_picture
+    return render(request, 'main/profile.html', {'user': user_profile, 'profile_picture_base64': profile_picture_base64})
+
+def lehrer(request):
+    return redirect("main:lehrer_dashboard")

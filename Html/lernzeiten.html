@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles2.css">
+    <script src="/static/utils/auto-refresh-2_min.js?v="></script>
+    <title>Lernzeiten</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Heller Hintergrund passend zu den aktuellen Farben */
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+        }
+
+        .body::-webkit-scrollbar {
+        display: hidden;
+        }
+
+        .body {
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
+        }
+
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+
+        .header {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow: auto; /* Enable scrolling */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            border-color: #fff;
+            color: #000000;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #bbb;
+            border-radius: 25px;
+            flex: 1;
+            min-width: 150px;
+            color: #000000;
+            background-color: #f9f9f9;
+        }
+
+        .search-container input:focus {
+            outline: none; /* Disable black border when typing */
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #bbb;
+            border-radius: 25px;
+            overflow: hidden;
+
+        }
+
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border: solid 1px;
+            border-color: #fff;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-container select:last-child {
+
+            border-bottom-right-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .filter-container select:first-child {
+            border-bottom-left-radius: 25px;
+            border-top-left-radius: 25px;
+        }
+
+        .filter-container select:focus {
+            outline: none;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1400px;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            width: 20%; /* Adjusted for 5 columns */
+        }
+
+        th {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:nth-of-type(even) {
+            background-color:hsla(168, 100.00%, 29.80%, 0.10);
+        }
+
+        tr:hover {
+            background-color: hsla(168, 100.00%, 29.80%, 0.30);
+        }
+
+        a {
+            text-decoration: none;
+            color: #009879;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .header a {
+                font-size: 16px;
+                margin: 5px 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .search-container {
+                justify-content: center;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
+                border: none;
+                border-radius: 0;
+                padding: 10px;
+                display: flex;
+                overflow: hidden;
+                box-shadow: none;
+            }
+
+            .filter-container select {
+                font-size: 14px;
+                padding: 8px;
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+                border-radius: 25px;
+            }
+
+            .filter-container select:last-child {
+                border-radius: 25px;
+            }
+
+            table {
+                font-size: 14px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+
+            red {
+                color: red;
+            }
+
+            green {
+                color: green;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="navigation" style="position: fixed; top: 0%; left: 0%; right: 0%;">
+        <div style=" position: absolute; top: 1%; left: 2%; z-index: 10;">
+            <a href="home.html"><img src="Home.svg"width="60" height="60"></a>
+        </div>
+
+        <div style=" position: relative; text-align:center; top: 20%; font-size: xx-large;">
+            <b>LernPlan</b>
+        </div>
+
+        <div style="position: absolute; top: 0%; right: 2%;">
+            <img src="LogoLernPlan.png" width="70" height="70" alt="LernPlan Logo">
+        </div>
+    </div> 
+    
+    <div class="container">
+        <h1>Lernzeiten 9e</h1>
+        
+        <div class="search-container">
+            <input type="text" id="nameSearch" onkeyup="filterTable()" placeholder="Suche nach Name...">
+        </div>
+        
+        <div class="filter-container">
+            <select id="datumFilter" onchange="filterTable()">
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Mo">Mo</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+                    <option value="Do">Do</option>
+                
+            </select>
+            <select id="stundeFilter" onchange="filterTable()">
+                <option value="">Alle Stunden</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="8">8</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+                    <option value="9">9</option>
+                
+            </select>
+        </div>
+        
+        <table id="lernzeitenTable">
+            <tr>
+                <th>Name</th>
+                <th>Lehrer</th>
+                <th>Raum</th>
+                <th>Tag</th>
+                <th>Stunde</th>
+                <th></th>
+            </tr>
+            
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=41'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>WY</td>
+                        <td>3014</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=42'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>JO</td>
+                        <td>4102</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=43'" style="cursor: pointer;">
+                        <td>LZ-GA</td>
+                        <td>RÜ</td>
+                        <td>4104</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=44'" style="cursor: pointer;">
+                        <td>LZ-GA</td>
+                        <td>DR</td>
+                        <td>C010</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=45'" style="cursor: pointer;">
+                        <td>LZ m Musik</td>
+                        <td>GRE</td>
+                        <td>2114</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=46'" style="cursor: pointer;">
+                        <td>LZ m Musik</td>
+                        <td>IW</td>
+                        <td>4105</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=47'" style="cursor: pointer;">
+                        <td>Ballsp./Fitness</td>
+                        <td>KNY</td>
+                        <td>SSH2</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=48'" style="cursor: pointer;">
+                        <td>Malen/Entspannen</td>
+                        <td>LIM</td>
+                        <td>3112</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=49'" style="cursor: pointer;">
+                        <td>LZ Entspannung</td>
+                        <td>GM</td>
+                        <td>SSHJ</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=50'" style="cursor: pointer;">
+                        <td>LZ-GA (A-Wochen)</td>
+                        <td>SI</td>
+                        <td>4112</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=51'" style="cursor: pointer;">
+                        <td>LZ-GA (B-Woche)</td>
+                        <td>RÜ</td>
+                        <td>4112</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=52'" style="cursor: pointer;">
+                        <td>LZ-GA</td>
+                        <td>MD</td>
+                        <td>4106</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=53'" style="cursor: pointer;">
+                        <td>LZ m Musik</td>
+                        <td>KNY</td>
+                        <td>C105</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=54'" style="cursor: pointer;">
+                        <td>LZ m Musik</td>
+                        <td>Thaleiser</td>
+                        <td>3013</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=55'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>Caspers</td>
+                        <td>3110</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=56'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>SEI</td>
+                        <td>4105</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=57'" style="cursor: pointer;">
+                        <td>Kicker</td>
+                        <td>ZER</td>
+                        <td>R-Kicker</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=58'" style="cursor: pointer;">
+                        <td>Uni-Hockey</td>
+                        <td>KÜHN</td>
+                        <td>SSH3</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=59'" style="cursor: pointer;">
+                        <td>Gesellschaftsspiele</td>
+                        <td>KRÜ</td>
+                        <td>4110</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=60'" style="cursor: pointer;">
+                        <td>Lego</td>
+                        <td>FS</td>
+                        <td>2111</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=61'" style="cursor: pointer;">
+                        <td>Fußball</td>
+                        <td>KÜHN</td>
+                        <td>SSH2</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=62'" style="cursor: pointer;">
+                        <td>LZ Enspannung</td>
+                        <td>SIM</td>
+                        <td>SSHJ</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=63'" style="cursor: pointer;">
+                        <td>WS: D-Gr/Re</td>
+                        <td>RO</td>
+                        <td>4101</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=64'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>KA</td>
+                        <td>4109</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=65'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MR</td>
+                        <td>C008</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=66'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>OR</td>
+                        <td>C110</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=67'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>SOT</td>
+                        <td>4211</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=68'" style="cursor: pointer;">
+                        <td>FLB Latein</td>
+                        <td>BÖ</td>
+                        <td>2103</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=69'" style="cursor: pointer;">
+                        <td>FLB Latein</td>
+                        <td>STZ</td>
+                        <td>4202</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=70'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>BU</td>
+                        <td>2104</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=71'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>RD</td>
+                        <td>2112</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=72'" style="cursor: pointer;">
+                        <td>WS: Gleich.</td>
+                        <td>SH</td>
+                        <td>2111</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=73'" style="cursor: pointer;">
+                        <td>WS: MatheAsse</td>
+                        <td>AM</td>
+                        <td>2105</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=74'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Kaiser</td>
+                        <td>3011</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=75'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Cornelißen</td>
+                        <td>3012</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=76'" style="cursor: pointer;">
+                        <td>LZ-Lesen</td>
+                        <td>ZA</td>
+                        <td>3105</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=77'" style="cursor: pointer;">
+                        <td>LZ-PA</td>
+                        <td>Thale</td>
+                        <td>3013</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=78'" style="cursor: pointer;">
+                        <td>LZ-PA</td>
+                        <td>Hauschke</td>
+                        <td>3107</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=79'" style="cursor: pointer;">
+                        <td>Lerncoaching</td>
+                        <td>MEI</td>
+                        <td>4213</td>
+                        <td>Mo</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=81'" style="cursor: pointer;">
+                        <td>FLB Deutsch</td>
+                        <td>ZA</td>
+                        <td>3105</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=82'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>KA</td>
+                        <td>4109</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=83'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MR</td>
+                        <td>C008</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=84'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MI</td>
+                        <td>C009</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=85'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>SOT</td>
+                        <td>4211</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=86'" style="cursor: pointer;">
+                        <td>FLB Latein</td>
+                        <td>BÖ</td>
+                        <td>2103</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=87'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>BU</td>
+                        <td>2104</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=88'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>RD</td>
+                        <td>2112</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=89'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>GRE</td>
+                        <td>2114</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=90'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Peckhaus</td>
+                        <td>3013</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=91'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>JO</td>
+                        <td>4102</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=92'" style="cursor: pointer;">
+                        <td>LZ-GA</td>
+                        <td>DR</td>
+                        <td>C010</td>
+                        <td>Mo</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=94'" style="cursor: pointer;">
+                        <td>FLB Deutsch</td>
+                        <td>PN</td>
+                        <td>4203</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=95'" style="cursor: pointer;">
+                        <td>FLB Deutsch</td>
+                        <td>THE</td>
+                        <td>3109</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=96'" style="cursor: pointer;">
+                        <td>FLB Deutsch (A-Woche)</td>
+                        <td>MR</td>
+                        <td>C008</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=97'" style="cursor: pointer;">
+                        <td>WS:Schreiben</td>
+                        <td>ZA</td>
+                        <td>3105</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=98'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MOT</td>
+                        <td>4001</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=99'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MI</td>
+                        <td>C009</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=100'" style="cursor: pointer;">
+                        <td>WS: E-Gr</td>
+                        <td>SM</td>
+                        <td>C007</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=101'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>EN</td>
+                        <td>4104</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=102'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>WA</td>
+                        <td>4002</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=103'" style="cursor: pointer;">
+                        <td>FLB Latein</td>
+                        <td>BÖ</td>
+                        <td>2103</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=104'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>SH</td>
+                        <td>2111</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=105'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>BF</td>
+                        <td>2114</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=106'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>MG</td>
+                        <td>2102</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=107'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Cornelißen</td>
+                        <td>3012</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=108'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Grüters</td>
+                        <td>3011</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=109'" style="cursor: pointer;">
+                        <td>LZ-Lesen</td>
+                        <td>VOS</td>
+                        <td>4004</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=110'" style="cursor: pointer;">
+                        <td>LZ-PA</td>
+                        <td>GDM</td>
+                        <td>4209</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=111'" style="cursor: pointer;">
+                        <td>LZ-PA</td>
+                        <td>FI</td>
+                        <td>3107</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=112'" style="cursor: pointer;">
+                        <td>Malen/Entspannen</td>
+                        <td>SIT</td>
+                        <td>-4103</td>
+                        <td>Do</td>
+                        <td>8</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=114'" style="cursor: pointer;">
+                        <td>FLB Deutsch</td>
+                        <td>PN</td>
+                        <td>4203</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=115'" style="cursor: pointer;">
+                        <td>FLB Deutsch</td>
+                        <td>THE</td>
+                        <td>3109</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=116'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MOT</td>
+                        <td>4001</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=117'" style="cursor: pointer;">
+                        <td>FLB Englisch</td>
+                        <td>MI</td>
+                        <td>C009</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=118'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>EN</td>
+                        <td>4104</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=119'" style="cursor: pointer;">
+                        <td>FLB Französisch</td>
+                        <td>WA</td>
+                        <td>4002</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=120'" style="cursor: pointer;">
+                        <td>FLB Latein</td>
+                        <td>BÖ</td>
+                        <td>2103</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=121'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>FS</td>
+                        <td>2111</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=122'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>BF</td>
+                        <td>2104</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=123'" style="cursor: pointer;">
+                        <td>FLB Mathe</td>
+                        <td>MG</td>
+                        <td>2102</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=124'" style="cursor: pointer;">
+                        <td>Silentium</td>
+                        <td>Cornelißen</td>
+                        <td>3012</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=125'" style="cursor: pointer;">
+                        <td>LZ digital</td>
+                        <td>Caspers</td>
+                        <td>3110</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=126'" style="cursor: pointer;">
+                        <td>LZ-GA</td>
+                        <td>MD</td>
+                        <td>4106</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=127'" style="cursor: pointer;">
+                        <td>LZ-PA</td>
+                        <td>FI</td>
+                        <td>3107</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            
+                        </td>
+                    </tr>
+                
+            
+                
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID=129'" style="cursor: pointer;">
+                        <td>Fußball</td>
+                        <td>KÜHN</td>
+                        <td>SSH2</td>
+                        <td>Do</td>
+                        <td>9</td>
+                        <td style="text-align: center">
+                            &#9997;
+                        </td>
+                    </tr>
+                
+            
+        </table>
+    </div>
+
+    <script>
+        function filterTable() {
+            var nameSearch, datumFilter, stundeFilter, table, tr, td, i, txtValue;
+            nameSearch = document.getElementById("nameSearch").value.toUpperCase();
+            datumFilter = document.getElementById("datumFilter").value.toUpperCase();
+            stundeFilter = document.getElementById("stundeFilter").value.toUpperCase();
+            table = document.getElementById("lernzeitenTable");
+            tr = table.getElementsByTagName("tr");
+            var visibleRowCount = 0;
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                if (td) {
+                    var name = td[0].textContent || td[0].innerText;
+                    var fach = td[1].textContent || td[1].innerText;
+                    var raum = td[2].textContent || td[2].innerText;
+                    var tag = td[3].textContent || td[3].innerText;
+                    var stunde = td[4].textContent || td[4].innerText;
+                    if ((name.toUpperCase().indexOf(nameSearch) > -1 || !nameSearch) &&
+                        (tag.toUpperCase().indexOf(datumFilter) > -1 || !datumFilter) &&
+                        (stunde.toUpperCase().indexOf(stundeFilter) > -1 || !stundeFilter)) {
+                        tr[i].style.display = "";
+                        tr[i].style.backgroundColor = (visibleRowCount % 2 === 0) ? "hsla(168, 100.00%, 29.80%, 0.10)" : "#e0f7fa";
+                        tr[i].classList.add('hover-effect');
+                        visibleRowCount++;
+                    }
+                }
+            }
+        }
+
+        // Set the current date as "Heute"
+        document.addEventListener("DOMContentLoaded", function() {
+            var today = new Date().toISOString().split('T')[0];
+            var options = document.querySelectorAll('#datumFilter option');
+            options.forEach(function(option) {
+                if (option.value === today) {
+                    option.textContent = "Heute";
+                }
+            });
+
+            // Remove duplicate options
+            removeDuplicateOptions('datumFilter');
+            removeDuplicateOptions('stundeFilter');
+
+            // Set default filter to Monday (or any other day)
+            const defaultDay = "Mo"; // Change this to the desired default day
+            const filterElement = document.querySelector("#datumFilter");
+            if (filterElement) {
+                filterElement.value = defaultDay;
+                filterElement.dispatchEvent(new Event('change')); // Trigger change event to apply the filter
+            }
+        });
+
+        function removeDuplicateOptions(selectId) {
+            var select = document.getElementById(selectId);
+            var seen = {};
+            for (var i = 0; i < select.options.length; i++) {
+                var option = select.options[i];
+                if (seen[option.value]) {
+                    select.remove(i);
+                    i--;
+                } else {
+                    seen[option.value] = true;
+                }
+            }
+        }
+
+        function lernzeit_info(lernzeit_ID) {
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch(`https://mzb-lev.de/lernzeit/info/?lernzeit_ID=${encodeURIComponent(lernzeit_ID)}&token=`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+        }
+    </script>
+    <style>
+        .hover-effect:hover {
+            background-color: hsla(168, 100.00%, 29.80%, 0.30) !important;
+        }
+    </style>
+    
+</body>
+</html>

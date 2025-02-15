@@ -7,4 +7,5 @@ urlpatterns = [
     path("login_fake/", views.run_login),
     path("run/", views.none),
     path("lz_register/", views.lz_register, name="lz_register"),
+    path("lz_unregister/", views.lz_delete, name="lz_delete"),
 ]

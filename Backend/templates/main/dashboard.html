@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{% static 'utils/auto-refresh-2_min.js' %}?v={{ timestamp }}"></script>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/Dashboard_Buttons.css' %}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -194,17 +195,36 @@
     </div>
     
     <div class="sidebar">
-        <a href="/lernzeiten">Lernzeiten</a>
+        <a href="/lernzeiten">Lernzeit-Katalog</a>
+        <a href="{% url "main:termine" %}">Lernzeit-Kalender</a>
         <a href="/hausaufgaben">Hausaufgaben</a>
-        <a href="/termine">Termine</a>
         <a href="/nachrichten">Nachrichten</a>
-        <a href="/einstellungen">Einstellungen</a>
+        
     </div>
     
     <div class="container">
-        <h1>Dashboard</h1>
+        
         
         <div class="dashboard">
+
+            <div class="namebutton2" onclick="window.location.href='{% url "main:lernzeiten" %}'">
+                <a>Jetzt für eine Lernzeit anmelden</a>
+                <img src="{% static 'bilder/Lernzeiten.png' %}" alt="Lernzeit" class="icon">
+            </div>  
+            <div class="namebutton2" onclick="window.location.href='{% url "main:termine" %}'">
+                <a>Deine Lernzeiten</a>
+                <img src="{% static 'bilder/Klassenarbeiten.png' %}" alt="Termine" class="icon">
+            </div> 
+            <div class="namebutton2" onclick="window.location.href='#'">
+                <a>Meine Hausaufgaben</a>
+                <img src="{% static 'bilder/Hausaufgaben.png' %}" alt="Hausaufgaben" class="icon">
+            </div> 
+            <div class="namebutton2" onclick="window.location.href='{% url "auth:logout" %}'">
+                <a>Logout</a>
+            </div>
+
+            
+
             <div class="dashboard-item">
                 <h2>Item 1</h2>
                 <p>Details about item 1.</p>
@@ -224,4 +244,6 @@
         </div>
     </div>
 </body>
+
+
 </html>

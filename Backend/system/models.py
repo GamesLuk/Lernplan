@@ -55,4 +55,4 @@ class AnmeldungProfile(models.Model):
     stunde = models.IntegerField(db_index=True)
 
     def __str__(self):
-        return self.name
+        return str(self.anmeldung_ID)

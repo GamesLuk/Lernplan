@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kalender mit Ereignissen</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
+    <style>
+        /* CSS-Stil für den Kalender */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa; /* Heller Hintergrund passend zu den aktuellen Farben */
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            
+            
+            
+            
+        }    
+        .header {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+        #calendar {
+            position: relative;
+            max-width: 900px;
+            margin: 0px auto;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgb(55, 106, 164);
+        }
+        .fc-toolbar {
+            background-color: rgb(55, 106, 164);
+            color: #fff;
+            height: 25px;
+            border-radius: 15px 15px 0 0;
+            padding: 10px;
+            margin-bottom: 0px;
+        }
+        .fc-toolbar .fc-left, .fc-toolbar .fc-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            left: 5px;
+        }
+        .fc-toolbar .fc-button {
+            background: rgb(127, 174, 228);
+            border: none;
+            color: #fff;
+            margin: 5px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            transition: background 0.3s;
+        }
+        .fc-toolbar .fc-button:hover {
+            background: rgb(59, 115, 180);
+        }
+        .fc-event {
+            border: none;
+            color: #fff;
+            padding: 5px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .fc-event .event-description {
+            font-size: 0.8em;
+            color: #f4f4f4;
+        }
+        .fc-bg td:nth-child(even) {
+            background: rgb(148, 198, 255);
+        }
+        .fc-bg td:nth-child(odd) {
+            background: rgb(121, 184, 255);
+        }
+        .fc-day-number {
+            color: #012b55;
+        }
+        .fc-day-number {
+            background-color: #ff0000;
+        }
+        .fc-time-grid .fc-slats td { 
+            height: 70px;
+        }
+        .fc-head-container th {
+            background-color: rgb(55, 106, 164); /* Hintergrundfarbe der Toolbar für Spaltenbeschreibungen */
+            color: #fff; /* Textfarbe */
+        }
+        .fc-day-header.fc-today {
+            background-color: rgb(236, 107, 81); /* Hintergrundfarbe des aktuellen Tages */
+        }
+        .important {
+            position: fixed;
+            background-color: transparent;
+            border-radius: 30px;
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .fc-toolbar .fc-center {
+            position: relative;
+            top: 10px;
+            width: 100%
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/dashboard">Home</a>
+        <a href="/lernzeiten">Lernzeiten</a>
+        <a href="#">Über uns</a>
+        <a href="#">Kontakt</a>
+    </div>
+
+    <div class="important">
+        <div id='calendar'></div>
+    </div>
+
+    
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/de.js'></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                defaultView: 'agendaWeek',
+                defaultDate: '2025-02-11',
+                navLinks: false,
+                editable: false,
+                eventLimit: false,
+                weekends: false,
+                allDaySlot: false,
+                minTime: '13:00:00', // Anzeigen ab 13 Uhr
+                maxTime: '17:00:00', // Anzeigen bis 17 Uhr
+                locale: 'de',
+                timeFormat: 'HH:mm',
+                columnFormat: 'dddd',  // Vollständige Wochentagsnamen
+                slotLabelFormat: 'HH 🕑', // Formatierung mit "Uhr""
+                contentHeight: 'auto', // Automatische Höhe basierend auf dem Inhalt
+                events: [
+                        {% for event in events %}
+                            {
+                                title: '{{event.title}}',
+                                start: '{{event.start}}',
+                                end: '{{event.end}}',
+                                description1: '{{event.description1}}',
+                                description2: '{{event.description2}}',
+                                color: '{{event.color}}',
+                                url: "{{event.url}}"
+                            },
+                        {% endfor %}
+                ],
+                eventRender: function(event, element) {
+                    if (event.description1) {
+                            element.append("<hr><div class='event-description'>" + event.description1 + "</div>");
+                    }
+                    if (event.description2) {
+                        element.append("<div class='event-description'>" + event.description2 + "</div>");
+                    }
+                    if (event.color) {
+                        element.css('background-color', event.color);
+                    }
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>

@@ -294,7 +294,7 @@
             
             {% for lernzeit in lernzeiten %}
                 {% if lernzeit.type != 0 or lernzeit.type != 1 %}
-                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID={{lernzeit.lernzeit_ID}}&token={{token}}'" style="cursor: pointer;">
+                    <tr onclick="location.href='https://mzb-lev.de/lernzeiten/info/?lernzeit_ID={{lernzeit.lernzeit_ID}}'" style="cursor: pointer;">
                         <td>{{ lernzeit.name }}</td>
                         <td>{{ lernzeit.teacher }}</td>
                         <td>{{ lernzeit.raum }}</td>

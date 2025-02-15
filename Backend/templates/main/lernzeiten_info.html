@@ -102,7 +102,7 @@
             margin-top: 20px;
         }
 
-        .button-container button {
+        .button_x {
             background-color: #009879;
             color: #ffffff;
             padding: 10px 20px;
@@ -112,8 +112,22 @@
             border-color: transparent
         }
 
-        .button-container button:hover {
+        .button_x:hover {
             background-color: #007f67;
+        }
+
+        .button_y {
+            background-color:rgb(248, 78, 78);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            border-color: transparent;
+        }
+
+        .button_y:hover {
+            background-color:rgb(197, 46, 46);
         }
 
         .dashboard {
@@ -229,10 +243,18 @@
             <!-- Weitere Dashboard-Felder können hier hinzugefügt werden -->
         </div>
         {% if lernzeit.type == 1 %}
-        <form method="POST" action="https://mzb-lev.de/run/lz_register/?lz_ID={{lernzeit.lernzeit_ID}}&stunde={{lernzeit.stunde}}&final_date={{final_date}}" class="button-container">
-            {% csrf_token %}
-            <button type="submit" >Anmelden</button>
-        </form>
+            {% if isAnmelded == 0 %}
+                <form method="POST" action="https://mzb-lev.de/run/lz_register/?lz_ID={{lernzeit.lernzeit_ID}}&stunde={{lernzeit.stunde}}&lz_date={{final_date}}" class="button-container">
+                    {% csrf_token %}
+                    <button type="submit" class="button_x">Anmelden</button>
+                </form>
+            {% endif %}
+            {% if isAnmelded == 1 %}
+                <form method="POST" action="https://mzb-lev.de/run/lz_unregister/?lz_ID={{lernzeit.lernzeit_ID}}&stunde={{lernzeit.stunde}}&lz_date={{final_date}}" class="button-container">
+                    {% csrf_token %}
+                    <button type="submit" class="button_y">Abmelden</button>
+                </form>
+            {% endif %}
         {% endif %}
     </div>
 </body>

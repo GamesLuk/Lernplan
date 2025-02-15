@@ -1,6 +1,6 @@
 import threading
 import time
-from system.models import StudentProfile, LernzeitProfile, system, AnmeldungProfile, 
+from system.models import StudentProfile, LernzeitProfile, system, AnmeldungProfile
 from utils.system import setKlasse_Role
 
 def set_Klasse_Role():

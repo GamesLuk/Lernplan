@@ -12,4 +12,5 @@ urlpatterns = [
     path("lernzeiten/", views.lernzeiten, name="lernzeiten"),
     path("lernzeiten/info/", views.lernzeiten_info, name="lernzeiten_info"),
     path("lehrer/dashboard/", views.lehrer_dashboard, name="lehrer_home"),
+    path("lernzeiten/kalender/", views.lernzeit_calendar, name="termine"),
 ]

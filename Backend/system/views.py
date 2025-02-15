@@ -87,14 +87,43 @@ def lz_register(request):
 
     if not (referer and referer.startswith(allowed_referer)):
         return HttpResponse("Ungültiger Zugriff", status=403)
+    
+    anmeldung_ID=getAnmeldung_ID()
+    school_ID=request.session['user']['school_ID']["school_ID"]
+    lernzeit_ID=request.GET.get("lz_ID")
+    date=timezone.now().date().strftime('%Y-%m-%d')  # Datum des Tages
+    lz_date=request.GET.get("lz_date")
+    stunde=request.GET.get("stunde")
+    
+    if AnmeldungProfile.objects.filter(school_ID=school_ID, lz_date=lz_date, stunde=stunde).exists():
+        AnmeldungProfile.objects.filter(school_ID=school_ID, lz_date=lz_date, stunde=stunde).delete()
+        # Alte Lernzeit gelöscht
+
+
 
     AnmeldungProfile.objects.create(
-        anmeldung_ID=getAnmeldung_ID(),
-        school_ID=request.session['user']['school_ID']["school_ID"],
-        lernzeit_ID=request.GET.get("lz_ID"),
-        date=timezone.now().date(),  # Datum des Tages
-        lz_date=request.GET.get("final_date"),
-        stunde=request.POST.get("stunde"),
+        anmeldung_ID=anmeldung_ID,
+        school_ID=school_ID,
+        lernzeit_ID=lernzeit_ID,
+        date=date,  # Datum des Tages
+        lz_date=lz_date,
+        stunde=stunde,
     )
 
     return redirect("main:lernzeiten") 
+
+def lz_delete(request):
+
+    referer = request.META.get('HTTP_REFERER')
+    allowed_referer = "https://mzb-lev.de/"
+
+    if not (referer and referer.startswith(allowed_referer)):
+        return HttpResponse("Ungültiger Zugriff", status=403)
+
+    school_ID=request.session['user']['school_ID']["school_ID"]
+    lz_date=request.GET.get("lz_date")
+    stunde=request.GET.get("stunde")
+
+    AnmeldungProfile.objects.filter(school_ID=school_ID, lz_date=lz_date, stunde=stunde).delete()
+
+    return redirect("main:lernzeiten")

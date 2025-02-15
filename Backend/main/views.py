@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib import admin
 from django.http import HttpResponse
@@ -5,7 +6,7 @@ from decorators.permissions import login_required, role_required, not_Student, o
 from utils.session import set_Session_Value, get_Session_Value, get_User_Value
 from django.conf import settings
 from utils.system import getSchool_ID, getDay, debug
-from system.models import LernzeitProfile
+from system.models import LernzeitProfile, AnmeldungProfile
 from django.utils import timezone
 
 
@@ -128,7 +129,8 @@ def lernzeiten_info(request):
             "lernzeit": LernzeitProfile.objects.get(lernzeit_ID=id),
             'timestamp': timezone.now().timestamp(),
             "request": request,
-            "final_date": final_date.date(),
+            "final_date": final_date.date().strftime("%Y-%m-%d"),
+            "isAnmelded": AnmeldungProfile.objects.filter(school_ID=request.session['user']['school_ID']["school_ID"], lernzeit_ID=id, lz_date=final_date.date()).exists(),
         }
 
         return render(request, "main/lernzeiten_info.html", vars)
@@ -146,3 +148,66 @@ def lehrer_dashboard(request):
         return render(request, "main/teacher_dashboard.html")
 
     return teacher_dashboard(request)
+
+def lernzeit_calendar(request):
+
+    set_Session_Value(request, settings.REQUESTED_URL_NAME, "main:termine")
+
+    @login_required
+    @only_students
+    def lernzeit_calendar(request):
+        set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
+
+        school_ID = request.session['user']['school_ID']["school_ID"]
+
+        lzs = list(AnmeldungProfile.objects.filter(school_ID=school_ID).values())
+
+        pre_vars = []
+
+        for lz in lzs:
+
+            debug(["lzs:", lzs, "lz:", lz])
+
+            lzlz = LernzeitProfile.objects.filter(lernzeit_ID=lz["lernzeit_ID"]).values().first()
+
+            debug([lzlz])
+
+            if lz["stunde"] == 8:
+                von = "T14:30:00"
+                bis = "T15:15:00"
+                pre_color = "#32CD32"
+            else:
+                von = "T15:20:00"
+                bis = "T16:05:00"
+                pre_color = "#FF6347"
+
+            debug([lz, von, bis, pre_color])
+
+            title = lzlz["name"]
+            start = str(lz["lz_date"]) + von
+            end = str(lz["lz_date"]) + bis
+            raum = lzlz["raum"]
+            lehrer = lzlz["teacher"]
+            color = pre_color
+
+            pre_vars.append(
+                {
+                    "title": title,
+                    "start": start,
+                    "end": end,
+                    "description1": raum,
+                    "description2": lehrer,
+                    "color": color,
+                    "url": "/lernzeiten/info/?lernzeit_ID=" + str(lz["lernzeit_ID"]),
+                }
+            )
+
+        debug([ pre_vars])
+
+        vars = {
+                "events": pre_vars,
+            }   
+
+        return render(request, "main/my_lernzeiten.html", vars)
+
+    return lernzeit_calendar(request)

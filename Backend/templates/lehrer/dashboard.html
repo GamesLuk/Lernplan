@@ -14,12 +14,12 @@
             padding: 0;
             background-color: #e0f7fa;
             display: flex;
+            flex-direction: column;
         }
 
         .header {
             background-color: #009879;
             color: #ffffff;
-            padding: 10px 0;
             text-align: center;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -42,6 +42,16 @@
             text-decoration: underline;
         }
 
+        .header a img:hover {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        #profileSidebarToggle:hover {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
         .sidebar {
             background-color: #007f67;
             color: #ffffff;
@@ -50,10 +60,15 @@
             padding-top: 60px;
             position: fixed;
             top: 0;
-            left: 0;
+            left: -200px; /* Initially hide the sidebar */
+            transition: left 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .sidebar.active {
+            left: 0; /* Show the sidebar when active */
         }
 
         .sidebar a {
@@ -61,16 +76,53 @@
             text-decoration: none;
             margin: 15px 0;
             font-size: 18px;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            transition: background-color 0.3s ease;
         }
 
         .sidebar a:hover {
-            text-decoration: underline;
+            background-color: #005f4f;
+        }
+
+        .profile-sidebar {
+            background-color: #007f67;
+            color: #ffffff;
+            width: 200px;
+            height: 100vh;
+            padding-top: 60px;
+            position: fixed;
+            top: 0;
+            right: -200px; /* Initially hide the profile sidebar */
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-sidebar.active {
+            right: 0; /* Show the profile sidebar when active */
+        }
+
+        .profile-sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 15px 0;
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-sidebar a:hover {
+            background-color: #005f4f;
         }
 
         .container {
-            margin-left: 200px;
             padding: 80px 20px 20px 20px;
-            width: calc(100% - 200px);
+            width: 100%;
             overflow: auto;
         }
 
@@ -126,7 +178,8 @@
             min-width: 160px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            right: 0;
+            right: 10px;
+            top: 60px;
             border-radius: 5px;
             overflow: hidden;
         }
@@ -146,10 +199,6 @@
             display: block;
         }
 
-        .dropdown:hover .dropbtn {
-            background-color: #005f4f;
-        }
-
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -157,7 +206,7 @@
             }
 
             .header a {
-                font-size: 16px;
+                font-size: 14px;
                 margin: 5px 0;
             }
 
@@ -183,49 +232,73 @@
                 padding: 15px;
                 margin-bottom: 15px;
             }
+
+            .namebutton2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+
+            .namebutton2 a {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .namebutton2 img {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="/dashboard">Home</a>
-        <div class="dropdown">
-            <button class="dropbtn">Mein Konto</button>
-            <div class="dropdown-content">
-                <a href="/profil">Profil</a>
-                <a href="/einstellungen">Einstellungen</a>
-                <a href="/logout">Abmelden</a>
-            </div>
-        </div>
+        {% load static %}
+        <a id="sidebarToggle"><img src="{% static "bilder/Home.svg" %}" width="40" height="40"></a>
+        <h1 style="padding: 0px;">LernPlan</h1>
+        <img id="profileSidebarToggle" src="{% static "bilder/LLP.png" %}" width="50" height="50" alt="LernPlan Logo" style="margin-right: 10px;">
     </div>
     
-    <div class="sidebar">
-        <a href="/lernzeiten">Lernzeit-Katalog</a>
-        <a href="{% url "main:termine" %}">Lernzeit-Kalender</a>
-        <a href="/hausaufgaben">Hausaufgaben</a>
-        <a href="/nachrichten">Nachrichten</a>
+    <div class="sidebar" id="sidebar">
+        <br><br>
+        <a href="/lernzeiten" onclick="window.location.href='/lernzeiten'">Lernzeit-Katalog</a>
+        <a href="{% url "main:termine" %}" onclick="window.location.href='{% url "main:termine" %}'">Lernzeit-Kalender</a>
+        <a href="/hausaufgaben" onclick="window.location.href='/hausaufgaben'">Hausaufgaben</a>
+        <a href="/nachrichten" onclick="window.location.href='/nachrichten'">Nachrichten</a>
         
     </div>
     
-    <div class="container">
+    <div class="profile-sidebar" id="profileSidebar">
+        <br><br>
+        <a href="/profile" onclick="window.location.href='/profile'">Profile</a>
+        <a href="/settings" onclick="window.location.href='/settings'">Settings</a>
+        <a href="{% url "auth:logout" %}" onclick="window.location.href='{% url "auth:logout" %}'">Logout</a>
+    </div>
+    
+    <div class="container" id="container">
         
-        
+        <br>
         <div class="dashboard">
 
             <div class="namebutton2" onclick="window.location.href='{% url "main:lernzeiten" %}'">
-                <a>Jetzt für eine Lernzeit anmelden</a>
+                <a>Meine Lernzeiten</a>
                 <img src="{% static 'bilder/Lernzeiten.png' %}" alt="Lernzeit" class="icon">
             </div>  
             <div class="namebutton2" onclick="window.location.href='{% url "main:termine" %}'">
-                <a>Deine Lernzeiten</a>
-                <img src="{% static 'bilder/Klassenarbeiten.png' %}" alt="Termine" class="icon">
+                <a>Meine Klassen & Kurse</a>
+                <img src="{% static 'bilder/Klasse.png' %}" alt="Termine" class="icon">
             </div> 
             <div class="namebutton2" onclick="window.location.href='#'">
-                <a>Meine Hausaufgaben</a>
-                <img src="{% static 'bilder/Hausaufgaben.png' %}" alt="Hausaufgaben" class="icon">
+                <a>Kalender</a>
+                <img src="{% static 'bilder/Kalender.png' %}" alt="Hausaufgaben" class="icon">
             </div> 
             <div class="namebutton2" onclick="window.location.href='{% url "auth:logout" %}'">
                 <a>Logout</a>
+                <img src="{% static 'bilder/Logout.png' %}" alt="Hausaufgaben" class="icon">
             </div>
 
             
@@ -248,6 +321,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+
+        document.getElementById('profileSidebarToggle').addEventListener('click', function() {
+            document.getElementById('profileSidebar').classList.toggle('active');
+        });
+    </script>
 </body>
 
 

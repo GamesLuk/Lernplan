@@ -139,7 +139,7 @@ def lernzeiten_info(request):
 
 def lehrer_dashboard(request):
 
-    set_Session_Value(request, settings.REQUESTED_URL_NAME, "main:teacher_home")
+    set_Session_Value(request, settings.REQUESTED_URL_NAME, "main:lehrer_dashboard")
 
     @login_required
     @not_Student

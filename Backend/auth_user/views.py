@@ -169,15 +169,20 @@ def microsoft_callback(request):
 
     # Einloggen
     set_Session_Value(request, "logged_in", True)
-
     
+    url="main:home"
+
+    if request.session.get("user").get("role") == 3:
+        url = "main:lehrer_dashboard"
+
+
     # Verarbeitung
     requested_url = get_Session_Value(request, settings.REQUESTED_URL_NAME)
 
     if requested_url != None:
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
         return redirect(requested_url)
-    return redirect('main:dashboard')
+    return redirect(url)
 
     #-----------------------------------------------------------------------------------------------------------------------------#
     #-----------------------------------------------------------------------------------------------------------------------------#

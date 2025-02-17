@@ -15,10 +15,6 @@
             align-items: center;
             height: 100%;
             margin: 0;
-            
-            
-            
-            
         }    
         .header {
             background-color: #009879;
@@ -47,7 +43,7 @@
             max-width: 900px;
             margin: 0px auto;
             background: #fff;
-            border-radius: 50px;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: rgb(55, 106, 164);
         }
@@ -98,9 +94,6 @@
         .fc-day-number {
             color: #012b55;
         }
-        .fc-day-number {
-            background-color: #ff0000;
-        }
         .fc-time-grid .fc-slats td { 
             height: 70px;
         }
@@ -123,9 +116,101 @@
         .fc-toolbar .fc-center {
             position: relative;
             top: 10px;
-            width: 100%
+            width: 100%;
             left: 50%;
             transform: translateX(-50%);
+        }
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .header a {
+                font-size: 14px;
+                margin: 5px 0;
+            }
+
+            .container {
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .search-container {
+                justify-content: center;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
+                border: none;
+                border-radius: 0;
+                padding: 10px;
+                display: flex;
+                overflow: hidden;
+                box-shadow: none;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .filter-container select {
+                font-size: 14px;
+                padding: 8px;
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+                border-radius: 25px;
+            }
+
+            .filter-container select:last-child {
+                border-radius: 25px;
+            }
+
+            table {
+                font-size: 14px;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: auto;
+                display: block;
+            }
+
+            th, td {
+                padding: 8px 10px;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            tr {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            tr:nth-of-type(even) {
+                background-color: hsla(168, 100.00%, 29.80%, 0.10);
+            }
+
+            tr:hover {
+                background-color: hsla(168, 100.00%, 29.80%, 0.30);
+            }
+
+            red {
+                color: red;
+            }
+
+            green {
+                color: green;
+            }
         }
     </style>
 </head>

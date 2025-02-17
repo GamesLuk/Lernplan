@@ -130,7 +130,7 @@ def lernzeiten_info(request):
             'timestamp': timezone.now().timestamp(),
             "request": request,
             "final_date": final_date.date().strftime("%Y-%m-%d"),
-            "isAnmelded": AnmeldungProfile.objects.filter(school_ID=request.session['user']['school_ID']["school_ID"], lernzeit_ID=id, lz_date=final_date.date()).exists(),
+            "isAnmelded": AnmeldungProfile.objects.filter(school_ID=request.session['user']['school_ID'], lernzeit_ID=id, lz_date=final_date.date()).exists(),
         }
 
         return render(request, "main/lernzeiten_info.html", vars)
@@ -158,7 +158,7 @@ def lernzeit_calendar(request):
     def lernzeit_calendar(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
 
-        school_ID = request.session['user']['school_ID']["school_ID"]
+        school_ID = request.session['user']['school_ID']
 
         lzs = list(AnmeldungProfile.objects.filter(school_ID=school_ID).values())
 

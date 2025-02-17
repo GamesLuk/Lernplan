@@ -89,7 +89,7 @@ def lz_register(request):
         return HttpResponse("Ungültiger Zugriff", status=403)
     
     anmeldung_ID=getAnmeldung_ID()
-    school_ID=request.session['user']['school_ID']["school_ID"]
+    school_ID=request.session['user']['school_ID']
     lernzeit_ID=request.GET.get("lz_ID")
     date=timezone.now().date().strftime('%Y-%m-%d')  # Datum des Tages
     lz_date=request.GET.get("lz_date")
@@ -120,7 +120,7 @@ def lz_delete(request):
     if not (referer and referer.startswith(allowed_referer)):
         return HttpResponse("Ungültiger Zugriff", status=403)
 
-    school_ID=request.session['user']['school_ID']["school_ID"]
+    school_ID=request.session['user']['school_ID']
     lz_date=request.GET.get("lz_date")
     stunde=request.GET.get("stunde")
 

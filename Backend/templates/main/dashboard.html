@@ -14,12 +14,12 @@
             padding: 0;
             background-color: #e0f7fa;
             display: flex;
+            flex-direction: column;
         }
 
         .header {
             background-color: #009879;
             color: #ffffff;
-            padding: 10px 0;
             text-align: center;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -42,6 +42,11 @@
             text-decoration: underline;
         }
 
+        .header a img:hover {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
         .sidebar {
             background-color: #007f67;
             color: #ffffff;
@@ -50,10 +55,15 @@
             padding-top: 60px;
             position: fixed;
             top: 0;
-            left: 0;
+            left: -200px; /* Initially hide the sidebar */
+            transition: left 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .sidebar.active {
+            left: 0; /* Show the sidebar when active */
         }
 
         .sidebar a {
@@ -68,9 +78,8 @@
         }
 
         .container {
-            margin-left: 200px;
             padding: 80px 20px 20px 20px;
-            width: calc(100% - 200px);
+            width: 100%;
             overflow: auto;
         }
 
@@ -126,7 +135,8 @@
             min-width: 160px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            right: 0;
+            right: 10px;
+            top: 60px;
             border-radius: 5px;
             overflow: hidden;
         }
@@ -146,10 +156,6 @@
             display: block;
         }
 
-        .dropdown:hover .dropbtn {
-            background-color: #005f4f;
-        }
-
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -157,7 +163,7 @@
             }
 
             .header a {
-                font-size: 16px;
+                font-size: 14px;
                 margin: 5px 0;
             }
 
@@ -178,23 +184,51 @@
             .dashboard {
                 grid-template-columns: 1fr;
             }
+
+            .dashboard-item {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .namebutton2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+
+            .namebutton2 a {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .namebutton2 img {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <a href="/dashboard">Home</a>
+        {% load static %}
+        <a id="sidebarToggle"><img src="{% static "bilder/Home.svg" %}" width="40" height="40"></a>
+        <h1 style="padding: 0px;">LernPlan</h1>
         <div class="dropdown">
-            <button class="dropbtn">Mein Konto</button>
+            <img src="{% static "bilder/LLP.png" %}" width="50" height="50" alt="LernPlan Logo" style="margin-right: 10px;">
             <div class="dropdown-content">
-                <a href="/profil">Profil</a>
-                <a href="/einstellungen">Einstellungen</a>
-                <a href="/logout">Abmelden</a>
+                <a href="/profile">Profile</a>
+                <a href="/settings">Settings</a>
+                <a href="{% url "auth:logout" %}">Logout</a>
             </div>
         </div>
     </div>
     
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
+        <br><br>
         <a href="/lernzeiten">Lernzeit-Katalog</a>
         <a href="{% url "main:termine" %}">Lernzeit-Kalender</a>
         <a href="/hausaufgaben">Hausaufgaben</a>
@@ -202,7 +236,7 @@
         
     </div>
     
-    <div class="container">
+    <div class="container" id="container">
         
         
         <div class="dashboard">
@@ -221,6 +255,7 @@
             </div> 
             <div class="namebutton2" onclick="window.location.href='{% url "auth:logout" %}'">
                 <a>Logout</a>
+                <img src="{% static 'bilder/Logout.png' %}" alt="Hausaufgaben" class="icon">
             </div>
 
             
@@ -243,6 +278,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
 </body>
 
 

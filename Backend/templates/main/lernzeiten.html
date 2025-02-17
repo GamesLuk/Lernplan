@@ -17,7 +17,7 @@
         }
 
         .body::-webkit-scrollbar {
-        display: hidden;
+        display: none;
         }
 
         .body {
@@ -192,20 +192,24 @@
             }
 
             .header a {
-                font-size: 16px;
+                font-size: 14px;
                 margin: 5px 0;
             }
 
             .container {
                 padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .search-container {
                 justify-content: center;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .filter-container {
@@ -217,6 +221,8 @@
                 display: flex;
                 overflow: hidden;
                 box-shadow: none;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .filter-container select {
@@ -237,10 +243,30 @@
                 font-size: 14px;
                 width: 100%;
                 max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: auto;
+                display: block;
             }
 
             th, td {
                 padding: 8px 10px;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            tr {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            tr:nth-of-type(even) {
+                background-color: hsla(168, 100.00%, 29.80%, 0.10);
+            }
+
+            tr:hover {
+                background-color: hsla(168, 100.00%, 29.80%, 0.30);
             }
 
             red {

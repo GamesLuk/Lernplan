@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kalender</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+    body {
+        background-color: #e0f7fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    
+    a {
+        color: rgb(255, 255, 255);
+        font-style: normal;
+        font-size: large;
+        text-decoration: none;
+    }
+    
+    .navigation {
+        height: 70px;
+        width: 100%;
+        color: white;
+        background-color: #009879;
+        z-index: 10;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0%; 
+        left: 0%; 
+        right: 0%;
+    }
+    
+    .obere-ecke {
+        position: fixed;
+        top: 0;
+        right: 0;
+    }
+    
+    .button3 {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: #000000;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .button3:hover {
+        background-color: #cc0000;
+    }
+    
+    .namebutton {
+        width: auto;
+        height: auto;
+        color: white;
+        background-color: hsla(168, 100%, 29.8%, 0.7);
+        border-radius: 5px;
+        position: absolute;
+        font-size: larger;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        text-align: center;
+        top: 10%; 
+        right: 1%; 
+        position: fixed;
+    }
+    
+    .namebutton2 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: hsla(168, 100%, 29.8%, 0.7);
+        border-radius: 5px;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .namebutton2 a {
+        display: flex;
+        padding: 20px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .namebutton2 a:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .icon {
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+    }
+    
+    .notizfeld {
+        width: 100%;
+        height: calc(100% - 70px);
+        padding: 20px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        resize: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        text-align: left;
+    }
+    
+    table {
+    width: 97%;
+    max-width: 1200px;
+    margin: 25px auto;
+    border-collapse: collapse;
+    font-size: 18px;
+    text-align: left;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    }
+    
+    th, td {
+    padding: 12px 15px;
+    width: 20%;
+    }
+    
+    th {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    }
+    
+    tr {
+    border-bottom: 1px solid #dddddd;
+    }
+    
+    tr:nth-of-type(even) {
+    background-color: hsla(168, 100.00%, 29.80%, 0.10);
+    }
+    
+    tr:hover {
+    background-color: hsla(168, 100.00%, 29.80%, 0.30);
+    }
+    
+    
+    .absagen{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: hsla(0, 100%, 30%, 0.5);
+        border-radius: 5px;
+        width: 60%;
+        max-width: 400px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .absagen:hover {
+        background-color: hsla(0, 100%, 30%, 1);
+    }
+
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            
+            
+            
+            
+        }    
+        .header {
+            background-color: #009879;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+        #calendar {
+            position: relative;
+            max-width: 900px;
+            margin: 0px auto;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgb(55, 106, 164);
+        }
+        .fc-toolbar {
+            background-color: rgb(55, 106, 164);
+            color: #fff;
+            height: 25px;
+            border-radius: 15px 15px 0 0;
+            padding: 10px;
+            margin-bottom: 0px;
+        }
+        .fc-toolbar .fc-left, .fc-toolbar .fc-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            left: 5px;
+        }
+        .fc-toolbar .fc-button {
+            background: rgb(127, 174, 228);
+            border: none;
+            color: #fff;
+            margin: 5px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .fc-toolbar .fc-button:hover {
+            background: rgb(59, 115, 180);
+        }
+        .fc-event {
+            border: none;
+            color: #fff;
+            padding: 5px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .fc-event .event-description {
+            font-size: 0.8em;
+            color: #f4f4f4;
+        }
+        .fc-bg td:nth-child(even) {
+            background: rgb(148, 198, 255);
+        }
+        .fc-bg td:nth-child(odd) {
+            background: rgb(121, 184, 255);
+        }
+        .fc-day-number {
+            color: #012b55;
+        }
+        .fc-day-number {
+            background-color: #ff0000;
+        }
+        .fc-time-grid .fc-slats td { 
+            height: 70px;
+        }
+        .fc-head-container th {
+            background-color: rgb(55, 106, 164); 
+            color: #fff;
+        }
+        .fc-day-header.fc-today {
+            background-color: rgb(236, 107, 81); 
+        }
+        .important {
+            position: fixed;
+            background-color: transparent;
+            border-radius: 30px;
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .fc-toolbar .fc-center {
+            position: relative;
+            top: 10px;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="obere-ecke"><div class="button3"><a href="seiteschließen.html">X</a></div></div>
+    <div class="navigation">
+        <div style=" position: absolute; top: 1%; left: 2%; z-index: 10;">
+            <a href="homelehrer.html"><img src="Home.svg"width="60" height="60"></a>
+        </div>
+
+        <div style=" position: relative; text-align:center; top: 20%; font-size: xx-large;">
+            <b>LernPlan</b>
+        </div>
+
+        <div style="position: absolute; top: 0%; right: 2%;">
+            <img src="LogoLernPlan.png" width="70" height="70" alt="LernPlan Logo">
+        </div>
+    </div> 
+
+    <div class="important">
+        <div id='calendar'></div>
+    </div>
+
+    
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/de.js'></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                defaultView: 'agendaWeek',
+                defaultDate: '2025-02-11',
+                navLinks: false,
+                editable: false,
+                eventLimit: false,
+                weekends: false,
+                allDaySlot: false,
+                minTime: '13:00:00', // Anzeigen ab 13 Uhr
+                maxTime: '17:00:00', // Anzeigen bis 17 Uhr
+                locale: 'de',
+                timeFormat: 'HH:mm',
+                columnFormat: 'dddd',  // Vollständige Wochentagsnamen
+                slotLabelFormat: 'HH 🕑', // Formatierung mit "Uhr""
+                contentHeight: 'auto', // Automatische Höhe basierend auf dem Inhalt
+                events: [
+                        
+                ],
+                eventRender: function(event, element) {
+                    if (event.description1) {
+                            element.append("<hr><div class='event-description'>" + event.description1 + "</div>");
+                    }
+                    if (event.description2) {
+                        element.append("<div class='event-description'>" + event.description2 + "</div>");
+                    }
+                    if (event.color) {
+                        element.css('background-color', event.color);
+                    }
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>

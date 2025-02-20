@@ -34,7 +34,7 @@ def home(request):
         vars = {
             "profile_picture_base64": user_profile.profile_picture
         }
-        return render(request, "main/dashboard.html")
+        return render(request, "main/dashboard.html", vars)
     
     return home(request)
 

@@ -206,6 +206,10 @@
             object-fit: cover; /* Bild zuschneiden, um es in den runden Rahmen zu passen */
         }
 
+        .profile-picture-small {
+            margin-right: 20px;
+        }
+
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -270,7 +274,7 @@
         <a id="sidebarToggle"><img src="{% static "bilder/Home.svg" %}" width="40" height="40"></a>
         <h1 style="padding: 0px;">LernPlan</h1>
 
-        <div class="profile-picture-small">
+        <div class="profile-picture-small" id="profileSidebarToggle">
             <img src="data:image/jpeg;base64,{{ profile_picture_base64 }}" alt="Profile Picture">
         </div>
 
@@ -305,7 +309,7 @@
                 <a>Deine Lernzeiten</a>
                 <img src="{% static 'bilder/Klassenarbeiten.png' %}" alt="Termine" class="icon">
             </div> 
-            <div class="namebutton2" onclick="window.location.href='#'">
+            <div class="namebutton2" onclick="window.location.href='{% url "main:home" %}'">
                 <a>Meine Hausaufgaben</a>
                 <img src="{% static 'bilder/Hausaufgaben.png' %}" alt="Hausaufgaben" class="icon">
             </div> 

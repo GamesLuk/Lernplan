@@ -30,6 +30,10 @@ def home(request):
     @only_students
     def home(request):
         set_Session_Value(request, settings.REQUESTED_URL_NAME, None)
+        user_profile = StudentProfile.objects.get(email=request.session['user']['email'])
+        vars = {
+            "profile_picture_base64": user_profile.profile_picture
+        }
         return render(request, "main/dashboard.html")
     
     return home(request)

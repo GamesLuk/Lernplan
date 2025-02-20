@@ -199,6 +199,13 @@
             display: block;
         }
 
+        .profile-picture-small img {
+            width: 40px; /* Größe des Bildes anpassen */
+            height: 40px; /* Größe des Bildes anpassen */
+            border-radius: 50%; /* Rundes Bild */
+            object-fit: cover; /* Bild zuschneiden, um es in den runden Rahmen zu passen */
+        }
+
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -252,6 +259,8 @@
                 width: 40px;
                 height: 40px;
             }
+
+    
         }
     </style>
 </head>
@@ -260,7 +269,11 @@
         {% load static %}
         <a id="sidebarToggle"><img src="{% static "bilder/Home.svg" %}" width="40" height="40"></a>
         <h1 style="padding: 0px;">LernPlan</h1>
-        <img id="profileSidebarToggle" src="{% static "bilder/LLP.png" %}" width="50" height="50" alt="LernPlan Logo" style="margin-right: 10px;">
+
+        <div class="profile-picture-small">
+            <img src="data:image/jpeg;base64,{{ profile_picture_base64 }}" alt="Profile Picture">
+        </div>
+
     </div>
     
     <div class="sidebar" id="sidebar">
@@ -274,7 +287,7 @@
     
     <div class="profile-sidebar" id="profileSidebar">
         <br><br>
-        <a href="/profile" onclick="window.location.href='/profile'">Profile</a>
+        <a href="/profile" onclick="window.location.href='main:profile'">Profile</a>
         <a href="/settings" onclick="window.location.href='/settings'">Settings</a>
         <a href="{% url "auth:logout" %}" onclick="window.location.href='{% url "auth:logout" %}'">Logout</a>
     </div>

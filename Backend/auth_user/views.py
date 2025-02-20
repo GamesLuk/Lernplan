@@ -170,9 +170,9 @@ def microsoft_callback(request):
     # Einloggen
     set_Session_Value(request, "logged_in", True)
     
-    url="main:home"
+    url="main:dashboard"
 
-    if request.session.get("user").get("role") == 3:
+    if request.session.get("user").get("role") == "2":
         url = "main:lehrer_dashboard"
 
 

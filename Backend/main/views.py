@@ -8,6 +8,9 @@ from django.conf import settings
 from utils.system import getSchool_ID, getDay, debug
 from system.models import LernzeitProfile, AnmeldungProfile, StudentProfile
 from django.utils import timezone
+import locale
+
+locale.setlocale(locale.LC_TIME, 'de_DE')
 
 
 # Create your views here.
@@ -135,6 +138,7 @@ def lernzeiten_info(request):
             "request": request,
             "final_date": final_date.date().strftime("%Y-%m-%d"),
             "isAnmelded": AnmeldungProfile.objects.filter(school_ID=request.session['user']['school_ID'], lernzeit_ID=id, lz_date=final_date.date()).exists(),
+            "final_date_str": final_date.date().strftime("%A, %d. %B %Y"),
         }
 
         return render(request, "main/lernzeiten_info.html", vars)

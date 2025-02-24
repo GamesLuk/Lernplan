@@ -35,6 +35,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            cursor: default;
         }
         
         h1 {
@@ -63,7 +64,15 @@
             background-color: #007a5c;
         }        
     </style>
+    <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+    <script type="module">
+        import { rainbowCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+      
+        new rainbowCursor({ element: document.body });
+      </script>
+
 </head>
+
 <body>
     <div class="hintergrund">
         <div class="glass">

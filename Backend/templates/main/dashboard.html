@@ -284,20 +284,29 @@
         <br><br>
         <a href="/lernzeiten" onclick="window.location.href='/lernzeiten'">Lernzeit-Katalog</a>
         <a href="{% url "main:termine" %}" onclick="window.location.href='{% url "main:termine" %}'">Lernzeit-Kalender</a>
-        <a href="/hausaufgaben" onclick="window.location.href='/hausaufgaben'">Hausaufgaben</a>
-        <a href="/nachrichten" onclick="window.location.href='/nachrichten'">Nachrichten</a>
+        <a href="#" onclick="window.location.href='#'">Hausaufgaben</a>
+        <a href="#" onclick="window.location.href='#'">Nachrichten</a>
         
     </div>
     
     <div class="profile-sidebar" id="profileSidebar">
         <br><br>
-        <a href="/profile" onclick="window.location.href='main:profile'">Profile</a>
-        <a href="/settings" onclick="window.location.href='/settings'">Settings</a>
+        <a href="#" onclick="window.location.href='#'">Profile</a>
+        <a href="#" onclick="window.location.href='#'">Settings</a>
         <a href="{% url "auth:logout" %}" onclick="window.location.href='{% url "auth:logout" %}'">Logout</a>
     </div>
     
     <div class="container" id="container">
         
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <br>
         <div class="dashboard">
 
@@ -309,32 +318,13 @@
                 <a>Deine Lernzeiten</a>
                 <img src="{% static 'bilder/Klassenarbeiten.png' %}" alt="Termine" class="icon">
             </div> 
-            <div class="namebutton2" onclick="window.location.href='{% url "main:home" %}'">
+            <div class="namebutton2" onclick="window.location.href='#'">
                 <a>Meine Hausaufgaben</a>
                 <img src="{% static 'bilder/Hausaufgaben.png' %}" alt="Hausaufgaben" class="icon">
             </div> 
             <div class="namebutton2" onclick="window.location.href='{% url "auth:logout" %}'">
                 <a>Logout</a>
                 <img src="{% static 'bilder/Logout.png' %}" alt="Hausaufgaben" class="icon">
-            </div>
-
-            
-
-            <div class="dashboard-item">
-                <h2>Item 1</h2>
-                <p>Details about item 1.</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Item 2</h2>
-                <p>Details about item 2.</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Item 3</h2>
-                <p>Details about item 3.</p>
-            </div>
-            <div class="dashboard-item">
-                <h2>Item 4</h2>
-                <p>Details about item 4.</p>
             </div>
         </div>
     </div>

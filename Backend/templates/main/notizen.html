@@ -3,33 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles2.css">
+    <title>Notizenseite</title>
+    <style>
+        body {
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
+        a {
+            color: rgb(255, 255, 255);
+            font-style: normal;
+            font-size: large;
+            text-decoration: none;
+        }
+
+        .navigation {
+            height: 70px;
+            width: 100%;
+            color: white;
+            background-color: #009879;
+            z-index: 10;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0%; 
+            left: 0%; 
+            right: 0%;
+        }
+
+        .obere-ecke {
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .button3 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #000000;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button3:hover {
+            background-color: #cc0000;
+        }
+
+        .namebutton {
+            width: auto;
+            height: auto;
+            color: white;
+            background-color: hsla(168, 100%, 29.8%, 0.7);
+            border-radius: 5px;
+            position: absolute;
+            font-size: larger;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            text-align: center;
+            top: 10%; 
+            right: 1%; 
+            position: fixed;
+        }
+
+        .namebutton2 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: hsla(168, 100%, 29.8%, 0.7);
+            border-radius: 5px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .namebutton2 a {
+            display: flex;
+            padding: 20px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .namebutton2 a:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+        }
+
+        .notizfeld {
+            width: 100%;
+            height: calc(100% - 70px);
+            padding: 20px;
+            font-size: 16px;
+            background-color: white;
+            border: none;
+            resize: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            text-align: left;
+        }
+
+        table {
+            width: 97%;
+            max-width: 1200px;
+            margin: 25px auto;
+            border-collapse: collapse;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            width: 20%;
+        }
+
+        th {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:nth-of-type(even) {
+            background-color: hsla(168, 100.00%, 29.80%, 0.10);
+        }
+
+        tr:hover {
+            background-color: hsla(168, 100.00%, 29.80%, 0.30);
+        }
+
+        .absagen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: hsla(0, 100%, 30%, 0.5);
+            border-radius: 5px;
+            width: 60%;
+            max-width: 400px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            color: white;
+            cursor: pointer;
+        }
+
+        .absagen:hover {
+            background-color: hsla(0, 80%, 40%, 1);
+        }
+
+        .delete-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+
+        .links {
+            position: absolute; 
+            top: 1%; 
+            left: 2%; 
+            z-index: 10;
+        }
+
+        .rechts {
+            position: absolute; 
+            top: 0%; 
+            right: 2%;
+        }
+
+        .mitte {
+            position: relative; 
+            text-align: center; 
+            top: 20%; 
+            font-size: xx-large;
+        }
+
+        .container {
+            display: flex;
+            margin-top: 70px;
+            padding: 20px;
+        }
+
+        .left {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .right {
+            flex: 1;
+            padding: 10px;
+            border-left: 1px solid #000;
+            font-family: Arial, sans-serif;
+        }
+
+        .note {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-
-    <div class="navigation" style="position: fixed; top: 0%; left: 0%; right: 0%;">
-        <div style=" position: absolute; top: 1%; left: 2%; z-index: 10;">
-            <a href="home.html"><img src="Home.svg"width="60" height="60"></a>
+    <div class="navigation">
+        <div class="links">
+            <a href="home.html"><img src="Home.svg" width="60" height="60"></a>
         </div>
 
-        <div style=" position: relative; text-align:center; top: 20%; font-size: xx-large;">
+        <div class="mitte">
             <b>LernPlan</b>
         </div>
 
-        <div style="position: absolute; top: 0%; right: 2%;">
+        <div class="rechts">
             <img src="LogoLernPlan.png" width="70" height="70" alt="LernPlan Logo">
         </div>
     </div> 
 
-<div class="namebutton" style="top: 10%; right: 1%; position: fixed;">
-    Name <br>
-    Klasse
-</div>
+    <div class="namebutton">
+        Name <br>
+        Klasse
+    </div>
 
+    <div class="container">
+        <div class="left">
+            <textarea id="inputText" rows="10" cols="30" placeholder="Gib hier deine Hausaufgaben ein."></textarea><br>
+            <button class="absagen" onclick="saveText()">Speichern</button>
+        </div>
+        <div class="right">
+            <div id="outputText"></div>
+        </div>
+    </div>
 
-<textarea class="notizfeld" placeholder="Schreib deine Notizen hier..."></textarea>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var savedText = localStorage.getItem("savedText");
+            if (savedText) {
+                var notes = JSON.parse(savedText);
+                notes.forEach(function(note) {
+                    addNoteToOutput(note);
+                });
+            }
+        });
 
+        function saveText() {
+            var inputText = document.getElementById("inputText").value;
+            if (inputText.trim() !== "") {
+                addNoteToOutput(inputText);
+                var savedText = localStorage.getItem("savedText");
+                var notes = savedText ? JSON.parse(savedText) : [];
+                notes.push(inputText);
+                localStorage.setItem("savedText", JSON.stringify(notes));
+                document.getElementById("inputText").value = "";
+            }
+        }
+
+        function addNoteToOutput(text) {
+            var outputText = document.getElementById("outputText");
+            var noteDiv = document.createElement("div");
+            noteDiv.className = "note";
+
+            var noteContent = document.createElement("span");
+            noteContent.innerText = text;
+
+            var deleteButton = document.createElement("button");
+            deleteButton.className = "delete-button";
+            deleteButton.innerText = "Löschen";
+            deleteButton.onclick = function() {
+                deleteNote(noteDiv, text);
+            };
+
+            noteDiv.appendChild(noteContent);
+            noteDiv.appendChild(deleteButton);
+            outputText.appendChild(noteDiv);
+        }
+
+        function deleteNote(noteDiv, text) {
+            var outputText = document.getElementById("outputText");
+            outputText.removeChild(noteDiv);
+
+            var savedText = localStorage.getItem("savedText");
+            var notes = savedText ? JSON.parse(savedText) : [];
+            var noteIndex = notes.indexOf(text);
+            if (noteIndex > -1) {
+                notes.splice(noteIndex, 1);
+                localStorage.setItem("savedText", JSON.stringify(notes));
+            }
+        }
+    </script>
 </body>
 </html>

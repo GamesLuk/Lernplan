@@ -110,7 +110,7 @@ def lz_register(request):
         stunde=stunde,
     )
 
-    return redirect("main:lernzeiten") 
+    return redirect("main:termine") 
 
 def lz_delete(request):
 
@@ -126,4 +126,4 @@ def lz_delete(request):
 
     AnmeldungProfile.objects.filter(school_ID=school_ID, lz_date=lz_date, stunde=stunde).delete()
 
-    return redirect("main:lernzeiten")
+    return redirect("main:termine")

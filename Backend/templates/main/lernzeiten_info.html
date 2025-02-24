@@ -172,6 +172,10 @@
             line-height: 1.8;
         }
 
+        d3 {
+                color: red;
+            }
+
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -219,6 +223,8 @@
                 margin-bottom: 15px;
                 width: 100%;
             }
+
+            
         }
     </style>
 </head>
@@ -238,6 +244,8 @@
                 <h2>{{lernzeit.name}}</h2>
                 <p>Raum: {{lernzeit.raum}}</p>
                 <p>Lehrer: {{lernzeit.teacher}}</p>
+                <p>Stunde: {{lernzeit.stunde}}</p>
+                <p>Datum: <d3>{{final_date_str}}</d3></p>
             </div>
             <div class="dashboard-item relative">
                 <h2>{{lernzeit.teacher}}</h2>

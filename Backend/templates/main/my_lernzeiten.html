@@ -115,10 +115,9 @@
         }
         .fc-toolbar .fc-center {
             position: relative;
-            top: 10px;
             width: 100%;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 40%;
+            top: -150%;
         }
         @media (max-width: 600px) {
             .header {
@@ -242,7 +241,7 @@
                     right: ''
                 },
                 defaultView: 'agendaWeek',
-                defaultDate: '2025-02-11',
+                defaultDate: moment().format('YYYY-MM-DD'), // Set to current date
                 navLinks: false,
                 editable: false,
                 eventLimit: false,
@@ -253,7 +252,7 @@
                 locale: 'de',
                 timeFormat: 'HH:mm',
                 columnFormat: 'dddd',  // Vollständige Wochentagsnamen
-                slotLabelFormat: 'HH 🕑', // Formatierung mit "Uhr""
+                slotLabelFormat: 'HH 🕑', // Formatierung mit "Uhr"
                 contentHeight: 'auto', // Automatische Höhe basierend auf dem Inhalt
                 events: [
                         {% for event in events %}
@@ -277,6 +276,29 @@
                     }
                     if (event.color) {
                         element.css('background-color', event.color);
+                    }
+
+                    var now = moment();
+                    var today = moment().startOf('day');
+                    var eventDate = moment(event.start).startOf('day');
+                    var cutoffTime = moment().startOf('day').add(8, 'hours').add(20, 'minutes');
+
+                    console.log("Event Date: ", eventDate.format());
+                    console.log("Today: ", today.format());
+                    console.log("Now: ", now.format());
+                    console.log("Cutoff Time: ", cutoffTime.format());
+
+                    if (eventDate.isBefore(today) || (eventDate.isSame(today) && now.isAfter(cutoffTime))) {
+                        event.url = null;
+                        console.log("Setting event URL to null for event: ", event.title);
+                        event.url = null;
+                        element.find('a.fc-event').removeAttr('href'); // Entferne den Link
+                    }
+                },
+                eventClick: function(event, jsEvent, view) {
+                    if (event.url) {
+                        window.open(event.url);
+                        return false;
                     }
                 }
             });

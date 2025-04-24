@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  lernplan_network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: .
+    image: gamesluk/lernplan_app:latest
+    container_name: lernplan_app
+    networks:
+      - lernplan_network
+    volumes:
+      - ./Lernplan:/app
+    command: ["/bin/bash", "-c", "./r0"]
+
+  redis:
+    image: redis:latest
+    container_name: lernplan_redis
+    networks:
+      - lernplan_network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: lernplan_cloudflared
+    networks:
+      - lernplan_network
+    command: tunnel --loglevel debug run --tunnel-id <your_tunnel_id>

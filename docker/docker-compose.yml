@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   lernplan_network:
     driver: bridge
@@ -8,13 +6,13 @@ services:
   app:
     build:
       context: .
-    image: gamesluk/lernplan_app:latest
+    image: gamesluk/lernplan:latest
     container_name: lernplan_app
     networks:
       - lernplan_network
     volumes:
       - ./Lernplan:/app
-    command: ["/bin/bash", "-c", "./r0"]
+    command: ["/bin/bash", "-c", "/app/docker/setup.sh && /bin/bash"]
 
   redis:
     image: redis:latest
@@ -27,4 +25,6 @@ services:
     container_name: lernplan_cloudflared
     networks:
       - lernplan_network
-    command: tunnel --loglevel debug run --tunnel-id <your_tunnel_id>
+    volumes:
+      - ./Lernplan/docker/cloudflared/:/etc/cloudflared/:ro # Mount der Config-Datei
+    command: tunnel --loglevel debug --config /etc/cloudflared/config.yml run lernplan-tunnel

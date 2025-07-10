@@ -1,0 +1,9 @@
+tunnel: lernplan-tunnel
+credentials-file: C:\Users\lukas\.cloudflared\411f0686-547f-4adb-9be9-0ad5abf32bc9.json
+
+ingress:
+  - hostname: mzb-lev.de
+    service: https://localhost:443
+  - hostname: "*.mzb-lev.de"
+    service: https://localhost:443
+  - service: http_status:404  # Rückfalloption (404, falls keine Übereinstimmung)
